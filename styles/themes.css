@@ -1,31 +1,31 @@
-/* GitHub Dark */
+/* GitHub Dark Default */
 :root {
-  --main-bg: #24292e;
-  --bg-text: rgba(56, 58, 61, 0.35);
-  --text-color: #efefef;
-  --accent-color: #f9826c;
-  --accent-color-rgb: 249, 130, 108;
-  --titlebar-bg: #1f2428;
-  --sidebar-bg: #24292e;
-  --sidebar-hover-bg: #1f2428;
-  --explorer-bg: #1f2428;
-  --explorer-hover-bg: #24292e;
-  --explorer-border: #161a1d;
-  --tabs-bg: #1f2428;
-  --tab-bg: #1f2428;
-  --tab-active-bg: #24292e;
-  --tab-border: #24292e;
-  --bottombar-bg: #24292e;
-  --bottombar-border: #1b1f23;
-  --button-bg: #176f2c;
-  --button-text: #dcffe4;
-  --bottombar-hover-bg: #4f4f52;
-  --scrollbar-track-bg: #24292e;
-  --scrollbar-thumb-bg: #333536;
-  --article-bg: #1f2428;
-  --terminal-bg: #1f2428;
-  --terminal-header-bg: #1f2428;
-  --terminal-border: #1b1f23;
+  --main-bg: #0d1117;
+  --bg-text: rgba(48, 54, 61, 0.35);
+  --text-color: #c9d1d9;
+  --accent-color: #58a6ff;
+  --accent-color-rgb: 88, 166, 255;
+  --titlebar-bg: #010409;
+  --sidebar-bg: #010409;
+  --sidebar-hover-bg: #161b22;
+  --explorer-bg: #010409;
+  --explorer-hover-bg: #161b22;
+  --explorer-border: #21262d;
+  --tabs-bg: #010409;
+  --tab-bg: #010409;
+  --tab-active-bg: #0d1117;
+  --tab-border: #21262d;
+  --bottombar-bg: #0d1117;
+  --bottombar-border: #30363d;
+  --button-bg: #238636;
+  --button-text: #ffffff;
+  --bottombar-hover-bg: #161b22;
+  --scrollbar-track-bg: #0d1117;
+  --scrollbar-thumb-bg: #30363d;
+  --article-bg: #161b22;
+  --terminal-bg: #0d1117;
+  --terminal-header-bg: #010409;
+  --terminal-border: #30363d;
 }
 
 /* Dracula */
