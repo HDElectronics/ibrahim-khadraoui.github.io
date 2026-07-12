@@ -1,0 +1,23 @@
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  padding: 0.3rem 1rem;
+  background: var(--main-bg);
+  color: var(--text-color);
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 0.8rem;
+  opacity: 0.75;
+  user-select: none;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.crumb {
+  display: flex;
+  align-items: center;
+}
+
+.chevron {
+  margin: 0 3px;
+  font-size: 0.9rem;
+}

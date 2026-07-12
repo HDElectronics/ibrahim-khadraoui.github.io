@@ -8,10 +8,14 @@ import Sidebar from '@/components/Sidebar';
 import Explorer from '@/components/Explorer';
 import Bottombar from '@/components/Bottombar';
 import Tabsbar from '@/components/Tabsbar';
+import Breadcrumbs from '@/components/Breadcrumbs';
 import Terminal from '@/components/Terminal';
 import CommandPalette from '@/components/CommandPalette';
+import { PORTFOLIO_FILES } from '@/lib/files';
 
 import styles from '@/styles/Layout.module.css';
+
+const DEFAULT_TABS = PORTFOLIO_FILES.map((file) => file.path);
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -23,6 +27,46 @@ const Layout = ({ children }: LayoutProps) => {
   const [isTerminalOpen, setIsTerminalOpen] = useState(false);
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
   const [chordKey, setChordKey] = useState<string | null>(null);
+  const [openTabs, setOpenTabs] = useState<string[]>(DEFAULT_TABS);
+  const [tabsRestored, setTabsRestored] = useState(false);
+
+  useEffect(() => {
+    try {
+      const saved = sessionStorage.getItem('openTabs');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          setOpenTabs(parsed);
+        }
+      }
+    } catch {
+      // corrupt storage — keep defaults
+    }
+    setTabsRestored(true);
+  }, []);
+
+  useEffect(() => {
+    setOpenTabs((prev) => (prev.includes(pathname) ? prev : [...prev, pathname]));
+  }, [pathname]);
+
+  useEffect(() => {
+    if (tabsRestored) {
+      sessionStorage.setItem('openTabs', JSON.stringify(openTabs));
+    }
+  }, [openTabs, tabsRestored]);
+
+  const closeTab = useCallback(
+    (path: string) => {
+      const index = openTabs.indexOf(path);
+      if (index === -1) return;
+      const next = openTabs.filter((p) => p !== path);
+      setOpenTabs(next);
+      if (path === pathname) {
+        router.push(next.length > 0 ? next[Math.min(index, next.length - 1)] : '/');
+      }
+    },
+    [openTabs, pathname, router]
+  );
 
   const toggleTerminal = useCallback(() => {
     setIsTerminalOpen(prev => !prev);
@@ -108,7 +152,8 @@ const Layout = ({ children }: LayoutProps) => {
         <Sidebar />
         <Explorer />
         <div className={styles.editorContainer}>
-          <Tabsbar />
+          <Tabsbar openTabs={openTabs} onCloseTab={closeTab} />
+          <Breadcrumbs />
           <div className={styles.editorWithTerminal}>
             <main id="main-editor" className={styles.content}>
               {children}
