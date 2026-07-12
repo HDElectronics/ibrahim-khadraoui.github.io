@@ -9,12 +9,45 @@ export interface Article {
   comments_count: number;
 }
 
+export type ProjectCategory = 'professional' | 'hardware';
+
 export interface Project {
   title: string;
   description: string;
   logo: string;
   link: string;
   slug: string;
+  tags: string[];
+  images: string[];
+  videos?: string[];
+  category?: ProjectCategory;
+  content?: ContentBlock[];
+}
+
+export interface Award {
+  title: string;
+  organization: string;
+  date: string;
+  description: string;
+  project?: string;
+  images: string[];
+  videos?: string[];
+}
+
+export interface ContentBlock {
+  type: 'h2' | 'h3' | 'h4' | 'p' | 'li' | 'img';
+  text?: string;
+  src?: string;
+}
+
+export interface WPArticle {
+  slug: string;
+  title: string;
+  date: string;
+  excerpt: string;
+  cover: string;
+  images: string[];
+  content: ContentBlock[];
 }
 
 export interface Repo {

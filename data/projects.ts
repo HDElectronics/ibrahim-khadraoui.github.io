@@ -1,42 +1,350 @@
-export interface Project {
-  title: string;
-  description: string;
-  logo: string;
-  link: string;
-  slug: string;
-}
+import { Project } from '@/types';
 
 export const projects: Project[] = [
   {
-    title: 'Driwwwle',
+    title: 'UAV-XR — VR-Based Fleet Control',
     description:
-      'Discover creative websites and developers. A portal for you to share your projects.',
-    logo: '/logos/driwwwle.svg',
-    link: 'https://github.com/itsnitinr/driwwwle',
-    slug: 'driwwwle',
+      'A VR-based fleet management system at TII for teleoperating drones and ground robots over 4G/5G. Operators see a live 360° feed in a VR headset and drive the vehicle through a VR treadmill, joysticks, or a custom smart glove, with haptic feedback closing the loop.',
+    logo: '/logos/chip.svg',
+    link: '/projects/uav-xr',
+    slug: 'uav-xr',
+    category: 'professional',
+    tags: ['VR', 'UAV', '5G', 'MQTT', 'ESP32', 'Haptics', 'TII'],
+    images: [
+      '/projects/uav-xr/smart-glove-board-3d-render.png',
+      '/projects/uav-xr/smart-glove-pcb-layout.png',
+      '/projects/uav-xr/smart-glove-1.jpg',
+      '/projects/uav-xr/smart-glove-drone-mounting-1.jpg',
+      '/projects/uav-xr/drone.jpg',
+      '/projects/uav-xr/jetson-nano.jpg',
+      '/projects/uav-xr/tactical-suite.jpg',
+      '/projects/uav-xr/desert-test-night-1.jpg',
+    ],
+    videos: [
+      '/projects/uav-xr/gitex.mp4',
+      '/projects/uav-xr/demo-desert.mp4',
+      '/projects/uav-xr/smart-glove-drone-test.mp4',
+      '/projects/uav-xr/hexa-drone-pid-calibration.mp4',
+    ],
+    content: [
+      {
+        type: 'p',
+        text: 'UAV-XR is a VR-based Fleet Management System (FMS) for remotely operating drones and ground robots from anywhere in the world. An operator wears a VR headset and sees a live 360° video feed streamed from the vehicle over 4G/5G, then controls it through a range of natural interfaces — steering the machine as if physically present. The goal: teleoperation toward the Internet of Senses, where sight, motion, and touch are all transmitted between operator and vehicle.',
+      },
+      { type: 'h3', text: 'System architecture' },
+      { type: 'li', text: '360° video streamed from the vehicle to a VR headset over 5G for full immersive situational awareness.' },
+      { type: 'li', text: 'MQTT as the real-time backbone — control commands and vehicle telemetry are published and subscribed between operator interfaces and the fleet.' },
+      { type: 'li', text: 'Multiple control interfaces: RC controller, VR joysticks, a VR treadmill (locomotion-based control), and a custom smart glove.' },
+      { type: 'li', text: 'Haptic feedback loop: the smart glove vibrators feed drone motion back to the hand, and a tactical suit applies vehicle data such as airspeed to the operator for full-body immersion.' },
+      { type: 'h3', text: 'Smart Glove (custom hardware)' },
+      {
+        type: 'p',
+        text: 'A custom wearable controller designed in-house at TII. Hand orientation and finger gestures become drone commands; embedded haptic vibrators feed the drone movement back to the hand in real time. It talks to the FMS over Wi-Fi, publishing gesture-derived commands to the MQTT broker and subscribing to telemetry to trigger haptic responses. Board: ESP32-WROOM-32, MPU-6050 IMU, ADS1115 16-bit ADC (4 flex sensors), 2× DRV8837 haptic drivers, CP2102N USB-UART — 57.4 × 47.0 mm.',
+      },
+      { type: 'h3', text: 'GITEX GLOBAL demo' },
+      {
+        type: 'p',
+        text: 'Live demo at GITEX GLOBAL: an operator in Dubai flew a drone physically located in Abu Dhabi, in real time, using the VR headset and VR treadmill — watched by Sheikh Fazza, son of the Ruler of Dubai.',
+      },
+      { type: 'h3', text: 'Field testing' },
+      {
+        type: 'p',
+        text: 'Desert flight tests (day and night), hexacopter PID calibration, glass-to-glass (G2G) latency measurement, and Jetson-based onboard compute.',
+      },
+    ],
   },
   {
-    title: 'VSCode Portfolio',
+    title: 'Falcon — Multimodal AI on Jetson Orin',
     description:
-      'A Visual Studio Code themed developer portfolio built with Next.js and CSS Modules.',
-    logo: '/logos/vsc.svg',
-    link: 'https://github.com/itsnitinr/vscode-portfolio',
-    slug: 'vscode-portfolio',
+      'A fully on-device multimodal AI pipeline on NVIDIA Jetson Orin, chaining Whisper (ASR), a Vision-Language Model, and Piper (TTS) into a real-time voice-in / voice-out assistant that can reason about what a camera sees — no cloud required.',
+    logo: '/logos/chip.svg',
+    link: '/projects/falcon',
+    slug: 'falcon',
+    category: 'professional',
+    tags: ['Jetson Orin', 'VLM', 'Whisper', 'Piper', 'ONNX Runtime', 'Edge AI', 'TII'],
+    images: ['/projects/falcon/architecture.svg'],
+    content: [
+      {
+        type: 'p',
+        text: 'Falcon is a real-time multimodal AI pipeline that runs entirely on the NVIDIA Jetson Orin edge platform. It accepts a spoken question alongside a camera image, understands both, and responds with a synthesized voice — all without cloud dependency.',
+      },
+      { type: 'h3', text: 'Pipeline' },
+      { type: 'li', text: 'Whisper (ASR) — captures user audio and transcribes it to text in real time, served through ONNX Runtime with the CUDA Execution Provider.' },
+      { type: 'li', text: 'Vision-Language Model — takes the transcribed query plus a live image frame and generates a contextual natural-language response.' },
+      { type: 'li', text: 'Piper (TTS) — converts the response text into natural-sounding speech with streaming, low-latency output.' },
+      { type: 'h3', text: 'Key optimizations' },
+      { type: 'li', text: 'ONNX Runtime GPU (CUDA EP) for hardware-accelerated inference without framework overhead.' },
+      { type: 'li', text: 'FP16 / INT8 quantization to fit within the Jetson unified-memory budget while preserving quality.' },
+      { type: 'li', text: 'Pipeline parallelism — image and audio capture run concurrently before VLM inference — and zero cloud round-trips for privacy and offline capability.' },
+    ],
   },
   {
-    title: 'Subtrackt',
+    title: 'Falcon3 Multimodal Agent — iOS',
     description:
-      'A simple and elegant way to track your subscriptions and save money.',
-    logo: '/logos/subtrackt.svg',
-    link: 'https://github.com/itsnitinr/subtrackt',
-    slug: 'subtrackt',
+      'A fully on-device voice conversational agent on iPhone. I integrated our Falcon3 vision-language model on Apple’s MLX framework so it runs natively on Apple Silicon, wrapped with ASR and TTS for a complete speech-to-speech loop — offline, no API keys.',
+    logo: '/logos/chip.svg',
+    link: '/projects/falcon3-ios',
+    slug: 'falcon3-ios',
+    category: 'professional',
+    tags: ['iOS', 'MLX', 'Falcon3', 'VLM', 'Edge AI', 'TII'],
+    images: ['/projects/falcon3-ios/architecture.svg'],
+    videos: ['/projects/falcon3-ios/ios-app-demo.mp4'],
+    content: [
+      {
+        type: 'p',
+        text: 'A fully on-device voice conversational agent running on iPhone. The user speaks a question — optionally about what the camera sees — and gets a spoken answer back. Everything runs locally on Apple Silicon: no cloud, no API keys.',
+      },
+      { type: 'h3', text: 'Pipeline' },
+      { type: 'li', text: 'ASR — captures the user speech and transcribes it to text.' },
+      { type: 'li', text: 'Falcon3 VLM (MLX) — takes the transcribed question plus an optional camera image and generates a response, running entirely on-device via MLX.' },
+      { type: 'li', text: 'TTS — synthesizes the response back into spoken audio.' },
+      { type: 'h3', text: 'Why MLX' },
+      {
+        type: 'p',
+        text: 'MLX is Apple’s array framework built for Apple Silicon’s unified memory. Integrating Falcon3 on MLX lets the model share memory with the iPhone GPU / Neural Engine and run inference locally within the phone’s memory budget — a private, offline, low-latency assistant with no server round-trips.',
+      },
+    ],
   },
   {
-    title: 'Coolify Deployments',
+    title: 'A2RL Smart Switching Camera',
     description:
-      'VSCode extension to track and deploy your Coolify applications.',
-    logo: '/logos/coolify.svg',
-    link: 'https://github.com/itsnitinr/coolify-vscode-extension',
-    slug: 'coolify-vscode-extension',
+      'A broadcast-automation system for A2RL autonomous racing at Yas Marina Circuit. I built the teams’ camera-management system: a from-scratch EMM client pulls each car’s live GPS, a CCTV coverage map plus a matching algorithm work out which camera frames each car, and every team is auto-routed its own car-locked stream.',
+    logo: '/logos/chip.svg',
+    link: '/projects/a2rl-smart-camera',
+    slug: 'a2rl-smart-camera',
+    category: 'professional',
+    tags: ['A2RL', 'Autonomous Racing', 'GPS', 'Python', 'Broadcast', 'Algorithms'],
+    images: [
+      '/projects/a2rl-smart-camera/emm-lib.gif',
+      '/projects/a2rl-smart-camera/real-test-one-car.gif',
+      '/projects/a2rl-smart-camera/geofencing.gif',
+    ],
+    content: [
+      {
+        type: 'p',
+        text: 'A broadcast-automation system that follows every autonomous race car with the right camera, automatically. Instead of a human director cutting between feeds, the system knows in real time which CCTV camera currently covers each car and routes each team its own dedicated stream focused on their vehicle. Part of A2RL (Autonomous Racing League) at Yas Marina Circuit, Abu Dhabi.',
+      },
+      { type: 'h3', text: 'How it works' },
+      { type: 'li', text: 'From a single datasheet describing the circuit’s EMM protocol, I wrote a client from scratch to connect to the EMM server at Yas Marina and pull the live GPS position of every car on track.' },
+      { type: 'li', text: 'I built a coverage map of the circuit’s fixed CCTV cameras — for each camera, the exact stretch of track it sees.' },
+      { type: 'li', text: 'A matching algorithm cross-references each car’s live GPS against the coverage map to determine, at every instant, which camera each car is currently under.' },
+      { type: 'li', text: 'The system then switches and delivers to each team the feed of the camera framing their car — a continuous, car-locked broadcast with no manual camera direction.' },
+    ],
+  },
+  {
+    title: 'ICAR — Load-Carrying Follower Robot',
+    description:
+      'My Master’s thesis: an autonomous mobile robot that follows a person and carries their load, aimed at helping people with disabilities and the elderly. Person tracking uses Ultra-Wideband (DWM1000) radio and trilateration, fused with LIDAR and wheel encoders, on a ROS + Arduino Due stack.',
+    logo: '/logos/chip.svg',
+    link: '/projects/icar',
+    slug: 'icar',
+    category: 'professional',
+    tags: ['UWB', 'DWM1000', 'ROS', 'Robotics', 'Master Thesis'],
+    images: [
+      '/projects/icar/robot-3d-design.png',
+      '/projects/icar/system-architecture.png',
+      '/projects/icar/dwm1000-pcb.png',
+      '/projects/icar/uwb-localization-test.png',
+    ],
+    content: [
+      {
+        type: 'p',
+        text: 'ICAR ("I Carry Because I Care") is an autonomous mobile robot that follows a person and carries their load — aimed at helping people with disabilities and the elderly with everyday mobility. Built as my Master’s thesis in Embedded Systems Electronics at USTHB, with prototyping at CDTA.',
+      },
+      { type: 'h3', text: 'Key contributions' },
+      { type: 'li', text: 'Person-tracking using Ultra-Wideband (DWM1000) radio and trilateration for real-time indoor localization.' },
+      { type: 'li', text: 'Mechanical design modelled in SolidWorks and fabricated in aluminium at the CDTA prototyping workshop.' },
+      { type: 'li', text: 'A custom PCB designed from scratch for the DWM1000 UWB module.' },
+      { type: 'li', text: 'Sensor fusion of an RPLIDAR A2 (obstacle avoidance) and OMRON wheel encoders (odometry).' },
+      { type: 'li', text: 'A linear control law on an Arduino Due, coordinated by a Raspberry Pi 3B+ running ROS.' },
+      { type: 'h3', text: 'Experimental results' },
+      {
+        type: 'p',
+        text: 'Three DWM1000 anchors were placed at known positions; the tag’s estimated position closely matched its real position, validating the trilateration algorithm.',
+      },
+    ],
+  },
+  {
+    title: 'Contactless Hand Sanitizer',
+    description:
+      'A hand-detection sanitizer dispenser built around an ATmega328P. An E18-D80NK IR sensor detects a hand and signals the MCU to actuate a relay that runs the pump for a short burst of gel.',
+    logo: '/logos/chip.svg',
+    link: '/projects/contactless-hand-sanitizer',
+    slug: 'contactless-hand-sanitizer',
+    category: 'hardware',
+    tags: ['ATmega328P', 'IR Sensor', 'PCB Design'],
+    images: [
+      '/projects/contactless-hand-sanitizer/3d_1-2.jpg',
+      '/projects/contactless-hand-sanitizer/sch-1.jpg',
+      '/projects/contactless-hand-sanitizer/pcb-2.png',
+    ],
+    content: [
+      {
+        type: 'p',
+        text: "This board is based on an ATmega328P microcontroller. The E18-D80NK IR sensor detects the presence of a hand and sends a signal to the MCU, which actuates a relay to run the pump for a short period of time to dispense disinfectant gel.",
+      },
+      {
+        type: 'p',
+        text: 'The board also includes additional options such as an input for a tank-level sensor to know the amount of gel remaining, and an input for an LCD display via the I2C bus.',
+      },
+    ],
+  },
+  {
+    title: 'Fast Line Follower (BATLFOLLOWER)',
+    description:
+      'A high-speed autonomous line-following robot designed from scratch around an ATmega328P AU MCU.',
+    logo: '/logos/chip.svg',
+    link: '/projects/fast-line-follower',
+    slug: 'fast-line-follower',
+    category: 'hardware',
+    tags: ['ATmega328P', 'Robotics', 'PCB Design'],
+    images: [
+      '/projects/fast-line-follower/3d_1.png',
+      '/projects/fast-line-follower/3d_2.png',
+      '/projects/fast-line-follower/3d_3.png',
+      '/projects/fast-line-follower/3d_4.png',
+      '/projects/fast-line-follower/pcb_top-1.jpg',
+      '/projects/fast-line-follower/pcb_bot-1.jpg',
+      '/projects/fast-line-follower/pcb_pcb-suiveur-league-of-robotics-copy_2021-08-19.png',
+    ],
+    content: [
+      {
+        type: 'p',
+        text: "My fast line follower, designed from scratch and based on an ATmega328P AU MCU.",
+      },
+    ],
+  },
+  {
+    title: 'Odometer',
+    description:
+      'An electronic odometer for cars that reads raw data from a wheel-mounted sensor (the type typically used for ABS) to calculate distance travelled.',
+    logo: '/logos/chip.svg',
+    link: '/projects/odometer',
+    slug: 'odometer',
+    category: 'hardware',
+    tags: ['ATmega328P', 'Automotive', 'PCB Design'],
+    images: [
+      '/projects/odometer/odometer_3d_1.jpg',
+      '/projects/odometer/odometer_3d_2.jpg',
+      '/projects/odometer/odometer_pcb_top.png',
+      '/projects/odometer/20210904_225630.jpg',
+    ],
+    content: [
+      {
+        type: 'p',
+        text: "An electronic odometer to calculate distances. The device reads raw data from a sensor placed on the wheel of a car, generally used for the ABS.",
+      },
+    ],
+  },
+  {
+    title: 'USB HID Gamepad',
+    description:
+      'A custom PCB built for a racing simulator, acting as a USB HID controller based on an ATmega328P.',
+    logo: '/logos/chip.svg',
+    link: '/projects/usb-hid-gamepad',
+    slug: 'usb-hid-gamepad',
+    category: 'hardware',
+    tags: ['ATmega328P', 'USB HID', 'PCB Design'],
+    images: [
+      '/projects/usb-hid-gamepad/22d1.png',
+      '/projects/usb-hid-gamepad/1pcb.png',
+      '/projects/usb-hid-gamepad/32d2.png',
+      '/projects/usb-hid-gamepad/43d1.png',
+      '/projects/usb-hid-gamepad/53d2.png',
+    ],
+    content: [
+      { type: 'p', text: 'This is a PCB for a car simulator.' },
+    ],
+  },
+  {
+    title: 'PCB Business Card',
+    description:
+      'A functional PCB business card built around a microcontroller and 3 RGB LEDs for programmable lighting effects.',
+    logo: '/logos/chip.svg',
+    link: '/projects/pcb-business-card',
+    slug: 'pcb-business-card',
+    category: 'hardware',
+    tags: ['Microcontroller', 'RGB', 'PCB Design'],
+    images: [
+      '/projects/pcb-business-card/20211003_221432.jpg',
+      '/projects/pcb-business-card/3d1.png',
+      '/projects/pcb-business-card/243689746_181965374046529_7860313549308326063_n.jpg',
+      '/projects/pcb-business-card/pcb_pcb-business-card_2021-10-03.png',
+    ],
+    content: [
+      {
+        type: 'p',
+        text: 'My PCB business card, based on a microcontroller and 3 RGB LEDs to make some cool lighting effects.',
+      },
+    ],
+  },
+  {
+    title: 'Other PCB Designs',
+    description:
+      'A collection of smaller PCBs designed for different tasks: a fast line follower V1, a LORA RA-01 carrier board, a DWM1000 UWB dev board, an enhanced Arduino UNO, an ATmega328P bootloader burner, and an 8x8 LED matrix.',
+    logo: '/logos/chip.svg',
+    link: '/projects/misc-pcb-designs',
+    slug: 'misc-pcb-designs',
+    category: 'hardware',
+    tags: ['ATmega328P', 'UWB', 'LoRa', 'PCB Design'],
+    images: [
+      '/projects/misc-pcb-designs/lf1.jpg',
+      '/projects/misc-pcb-designs/lf2.jpg',
+      '/projects/misc-pcb-designs/lf3.jpg',
+      '/projects/misc-pcb-designs/lf4.jpg',
+      '/projects/misc-pcb-designs/lf5.jpg',
+      '/projects/misc-pcb-designs/217512477_823258171670493_6388861688583844451_n.jpg',
+      '/projects/misc-pcb-designs/lora_adapter_1.jpg',
+      '/projects/misc-pcb-designs/lora_adapter_2.jpg',
+      '/projects/misc-pcb-designs/lora_adapter_3.jpg',
+      '/projects/misc-pcb-designs/3d_1.jpg',
+      '/projects/misc-pcb-designs/3d_2.jpg',
+      '/projects/misc-pcb-designs/3d_3.jpg',
+      '/projects/misc-pcb-designs/pcb_bot.jpg',
+      '/projects/misc-pcb-designs/20210907_195813.jpg',
+      '/projects/misc-pcb-designs/adruinov2_3d_1.jpg',
+      '/projects/misc-pcb-designs/adruinov2_3d_2.jpg',
+      '/projects/misc-pcb-designs/atmega328p_3d_1.jpg',
+      '/projects/misc-pcb-designs/atmega328p_3d_2.jpg',
+      '/projects/misc-pcb-designs/pcb_pcb-atmega328p-bootloader-burner_2021-08-19.png',
+      '/projects/misc-pcb-designs/led-matrix-8x8-3d_1.png',
+      '/projects/misc-pcb-designs/led-matrix-8x8-3d_2.png',
+      '/projects/misc-pcb-designs/led-matrix-8x8-pcb_2021-08-19.png',
+    ],
+    content: [
+      {
+        type: 'h4',
+        text: 'Fast Line Follower V1',
+      },
+      {
+        type: 'p',
+        text: 'Based on an ATmega328P AU (TQFP32) with a CH340G for USB-to-serial, TCRT5000 IR sensors for black-line detection, an LM2596S-ADJ buck converter, and an L298N motor driver for two N20 6V DC motors.',
+      },
+      { type: 'h4', text: 'LORA RA-01 Board Carrier' },
+      {
+        type: 'p',
+        text: 'A carrier board for the LORA RA-01 module, with an ON/OFF switch and a buck converter based on the MP2307.',
+      },
+      { type: 'h4', text: 'DWM1000 Development Board' },
+      {
+        type: 'p',
+        text: 'A development board for the DW1000 UWB module, using an ATmega328P AU as MCU and a CH340T for USB-to-serial. Fuses, ferrite beads, and Schottky diodes protect the board.',
+      },
+      { type: 'h4', text: 'Arduino UNO Enhanced Version' },
+      {
+        type: 'p',
+        text: 'An enhanced version of the Arduino UNO, in development, focused on better power efficiency and added protection (USB line, reverse polarity, etc).',
+      },
+      { type: 'h4', text: 'ATmega328P AU Bootloader Burner' },
+      {
+        type: 'p',
+        text: 'A board to easily burn the Arduino bootloader into an ATmega328P AU, switchable between 5V/16MHz and 3.3V/8MHz configurations via jumpers.',
+      },
+      { type: 'h4', text: '8x8 LED Matrix' },
+      {
+        type: 'p',
+        text: 'An 8x8 SMD LED matrix with a reprogrammable ATmega328P AU microcontroller and a MAX7219 LED driver IC.',
+      },
+    ],
   },
 ];
