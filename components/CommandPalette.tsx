@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import { VscSymbolColor, VscTerminal, VscFiles, VscGoToFile, VscGear, VscColorMode, VscHome, VscAccount, VscCode, VscBook, VscMail, VscGithubAlt } from 'react-icons/vsc';
+import { VscSymbolColor, VscTerminal, VscFiles, VscGoToFile, VscGear, VscColorMode, VscHome, VscAccount, VscCode, VscBook, VscMail, VscGithubAlt, VscStarFull } from 'react-icons/vsc';
 import { MdNavigateNext } from 'react-icons/md';
 
 import { THEMES } from '@/lib/themes';
@@ -81,6 +81,14 @@ const CommandPalette = ({ isOpen, onClose, onToggleTerminal, isTerminalOpen }: C
         shortcut: 'G G',
         icon: <VscGithubAlt size={16} />,
         action: () => router.push('/github'),
+      },
+      {
+        id: 'go-awards',
+        label: 'Go to Awards',
+        category: 'Navigation',
+        shortcut: 'G W',
+        icon: <VscStarFull size={16} />,
+        action: () => router.push('/awards'),
       },
       {
         id: 'go-settings',

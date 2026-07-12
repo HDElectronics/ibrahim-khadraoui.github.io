@@ -1,6 +1,6 @@
 'use client';
 
-import { VscGithub, VscMail, VscLinkExternal } from 'react-icons/vsc';
+import { VscGithub, VscMail } from 'react-icons/vsc';
 import Link from 'next/link';
 
 import styles from '@/styles/AboutPage.module.css';
@@ -13,19 +13,19 @@ const AboutPage = () => {
         <header className={styles.header}>
           <div className={styles.headerContent}>
             <div className={styles.headerText}>
-              <h1 className={styles.name}>Nitin Ranganath</h1>
-              <p className={styles.role}>Software Engineer at Tessact</p>
+              <h1 className={styles.name}>Ibrahim Khadraoui</h1>
+              <p className={styles.role}>Embedded Systems Engineer</p>
               <div className={styles.location}>
                 <span className={styles.dot} />
-                Mumbai, India
+                Bouzareah, Algiers, Algeria
               </div>
             </div>
           </div>
-          
+
           <div className={styles.headerActions}>
-            <a 
-              href="https://github.com/itsnitinr" 
-              target="_blank" 
+            <a
+              href="https://github.com/HDElectronics"
+              target="_blank"
               rel="noopener noreferrer"
               className={styles.iconButton}
             >
@@ -44,164 +44,68 @@ const AboutPage = () => {
               <span className={styles.sectionNumber}>01</span>
               <h2 className={styles.sectionTitle}>About</h2>
             </div>
-            
+
             <div className={styles.sectionBody}>
               <p className={styles.paragraph}>
-                I&apos;m a software engineer passionate about crafting beautiful, performant 
-                web experiences. I primarily work with the JavaScript/TypeScript ecosystem 
-                and React, building products that people love to use.
+                I&apos;m an embedded systems engineer who designs and builds
+                custom PCBs, from schematic to layout to bring-up. Most of my
+                work centers on ATmega328P and STM32-based boards — sensor
+                interfacing, motor control, power design, and USB/serial
+                communication.
               </p>
-              
+
               <p className={styles.paragraph}>
-                While I specialize in frontend development, I enjoy working across the 
-                stack with Node.js, MongoDB, and Express to bring full-stack applications 
-                to life.
+                I use KiCad for schematic capture and PCB layout, and enjoy
+                taking a project all the way from an idea to a soldered,
+                working prototype.
               </p>
-            </div>
-          </section>
-
-          {/* Experience Section */}
-          <section className={styles.section}>
-            <div className={styles.sectionHeader}>
-              <span className={styles.sectionNumber}>02</span>
-              <h2 className={styles.sectionTitle}>Experience</h2>
-            </div>
-            
-            <div className={styles.sectionBody}>
-              <div className={styles.experienceCard}>
-                <div className={styles.expMeta}>
-                  <span className={styles.expPeriod}>Present</span>
-                </div>
-                <h3 className={styles.expRole}>Software Engineer 2</h3>
-                <p className={styles.expCompany}>Tessact</p>
-                <ul className={styles.expList}>
-                  <li>Leading frontend development with a lean team of 4 engineers</li>
-                  <li>Building a next-gen video creation suite for professionals</li>
-                  <li>Implemented collaborative video reviewing and editing features</li>
-                  <li>Maintaining in-house component library, icon library and website</li>
-                </ul>
-              </div>
-
-              <div className={styles.experienceCard}>
-                <div className={styles.expMeta}>
-                  <span className={styles.expPeriod}>Freelance</span>
-                </div>
-                <h3 className={styles.expRole}>Technical Writer</h3>
-                <p className={styles.expDesc}>
-                  Contributing to publications like <strong>100ms Blog</strong>, 
-                  <strong>LogRocket Blog</strong>, and <strong>DEV.to</strong>.
-                </p>
-              </div>
             </div>
           </section>
 
           {/* Skills Section */}
           <section className={styles.section}>
             <div className={styles.sectionHeader}>
-              <span className={styles.sectionNumber}>03</span>
+              <span className={styles.sectionNumber}>02</span>
               <h2 className={styles.sectionTitle}>Skills</h2>
             </div>
-            
+
             <div className={styles.sectionBody}>
               <div className={styles.skillsGrid}>
                 <div className={styles.skillCategory}>
-                  <h4 className={styles.skillTitle}>Languages</h4>
+                  <h4 className={styles.skillTitle}>Microcontrollers</h4>
                   <div className={styles.skillTags}>
-                    <span className={styles.skillTag}>JavaScript</span>
-                    <span className={styles.skillTag}>TypeScript</span>
-                    <span className={styles.skillTag}>HTML/CSS</span>
+                    <span className={styles.skillTag}>ATmega328P</span>
+                    <span className={styles.skillTag}>STM32F103</span>
+                    <span className={styles.skillTag}>Arduino</span>
                   </div>
                 </div>
-                
+
                 <div className={styles.skillCategory}>
-                  <h4 className={styles.skillTitle}>Frontend</h4>
+                  <h4 className={styles.skillTitle}>PCB Design</h4>
                   <div className={styles.skillTags}>
-                    <span className={styles.skillTag}>React</span>
-                    <span className={styles.skillTag}>Next.js</span>
-                    <span className={styles.skillTag}>Tailwind CSS</span>
+                    <span className={styles.skillTag}>KiCad</span>
+                    <span className={styles.skillTag}>Schematic Capture</span>
+                    <span className={styles.skillTag}>PCB Layout</span>
                   </div>
                 </div>
-                
+
                 <div className={styles.skillCategory}>
-                  <h4 className={styles.skillTitle}>Backend</h4>
+                  <h4 className={styles.skillTitle}>Interfaces</h4>
                   <div className={styles.skillTags}>
-                    <span className={styles.skillTag}>Node.js</span>
-                    <span className={styles.skillTag}>Express</span>
-                    <span className={styles.skillTag}>MongoDB</span>
+                    <span className={styles.skillTag}>USB HID</span>
+                    <span className={styles.skillTag}>I2C / SPI / UART</span>
+                    <span className={styles.skillTag}>LoRa / UWB</span>
                   </div>
                 </div>
-                
+
                 <div className={styles.skillCategory}>
-                  <h4 className={styles.skillTitle}>Tools</h4>
+                  <h4 className={styles.skillTitle}>Networking</h4>
                   <div className={styles.skillTags}>
-                    <span className={styles.skillTag}>Git</span>
-                    <span className={styles.skillTag}>VS Code</span>
-                    <span className={styles.skillTag}>Figma</span>
+                    <span className={styles.skillTag}>Cisco (CCNA)</span>
+                    <span className={styles.skillTag}>Robotics</span>
                   </div>
                 </div>
               </div>
-            </div>
-          </section>
-
-          {/* Writing Section */}
-          <section className={styles.section}>
-            <div className={styles.sectionHeader}>
-              <span className={styles.sectionNumber}>04</span>
-              <h2 className={styles.sectionTitle}>Writing</h2>
-            </div>
-            
-            <div className={styles.sectionBody}>
-              <p className={styles.paragraph}>
-                I&apos;ve had the pleasure of writing for some amazing publications 
-                as a freelance technical author:
-              </p>
-              
-              <div className={styles.writingLinks}>
-                <a 
-                  href="https://www.100ms.live/blog/author/nitin" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className={styles.writingLink}
-                >
-                  <span>100ms Blog</span>
-                  <VscLinkExternal size={14} />
-                </a>
-                
-                <a 
-                  href="https://blog.logrocket.com/author/nitinranganath/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className={styles.writingLink}
-                >
-                  <span>LogRocket Blog</span>
-                  <VscLinkExternal size={14} />
-                </a>
-                
-                <a 
-                  href="https://dev.to/itsnitinr" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className={styles.writingLink}
-                >
-                  <span>DEV.to</span>
-                  <VscLinkExternal size={14} />
-                </a>
-              </div>
-            </div>
-          </section>
-
-          {/* Beyond Code Section */}
-          <section className={styles.section}>
-            <div className={styles.sectionHeader}>
-              <span className={styles.sectionNumber}>05</span>
-              <h2 className={styles.sectionTitle}>Beyond Code</h2>
-            </div>
-            
-            <div className={styles.sectionBody}>
-              <p className={styles.paragraph}>
-                Aside from programming and writing, I enjoy reading dystopian novels, 
-                listening to calm piano music, or just enjoying some downtime.
-              </p>
             </div>
           </section>
         </div>

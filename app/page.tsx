@@ -18,17 +18,17 @@ export default function HomePage() {
 
           <div className={styles.intro}>
             <p className={styles.greeting}>Hello, I&apos;m</p>
-            
-            <h1 className={styles.name}>Nitin Ranganath</h1>
-            
-            <p className={styles.role}>Full Stack Developer</p>
-            
+
+            <h1 className={styles.name}>Ibrahim Khadraoui</h1>
+
+            <p className={styles.role}>Embedded Systems Engineer</p>
+
             <div className={styles.divider} />
-            
+
             <p className={styles.description}>
-              I craft clean, performant web applications with modern technologies. 
-              Specialized in TypeScript, React, Node.js, and building products 
-              that users love.
+              I design and build custom PCBs, from schematic to layout to
+              bring-up. Specialized in ATmega328P and STM32-based boards,
+              sensor interfacing, and motor control.
             </p>
           </div>
 
@@ -44,8 +44,8 @@ export default function HomePage() {
           </div>
 
           <div className={styles.links}>
-            <a 
-              href="https://github.com/itsnitinr" 
+            <a
+              href="https://github.com/HDElectronics"
               target="_blank" 
               rel="noopener noreferrer"
               className={styles.link}

@@ -7,27 +7,28 @@ import '@/styles/themes.css';
 
 export const metadata: Metadata = {
   title: {
-    default: 'Nitin Ranganath | Portfolio',
-    template: 'Nitin Ranganath | %s',
+    default: 'Ibrahim Khadraoui | Portfolio',
+    template: 'Ibrahim Khadraoui | %s',
   },
   description:
-    "Nitin Ranganath is an avid full stack web developer building websites and applications you'd love to use",
+    'Ibrahim Khadraoui is an embedded systems engineer designing custom PCBs and microcontroller-based hardware.',
   keywords: [
-    'nitin ranganath',
-    'nitin',
-    'ranganath',
-    'web developer portfolio',
-    'nitin web developer',
-    'nitin developer',
-    'mern stack',
-    'nitin ranganath portfolio',
+    'ibrahim khadraoui',
+    'ibrahim',
+    'khadraoui',
+    'embedded systems engineer',
+    'pcb design portfolio',
+    'atmega328p',
+    'stm32',
+    'kicad',
+    'hdelectronics',
     'vscode-portfolio',
   ],
   openGraph: {
-    title: "Nitin Ranganath's Portfolio",
+    title: "Ibrahim Khadraoui's Portfolio",
     description:
-      "A full-stack developer building websites that you'd like to use.",
-    images: ['https://imgur.com/4zi5KkQ.png'],
+      'An embedded systems engineer designing custom PCBs and microcontroller-based hardware.',
+    images: ['https://imgur.com/JXJ9mpO.gif'],
     url: 'https://vscode-portfolio.vercel.app',
   },
   twitter: {

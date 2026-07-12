@@ -1,7 +1,7 @@
 # vscode-portfolio
-[![Open in Visual Studio Code](https://img.shields.io/static/v1?logo=visualstudiocode&label=&message=Open%20in%20Visual%20Studio%20Code&labelColor=2c2c32&color=007acc&logoColor=007acc)](https://vscode.dev/github/itsnitinr/vscode-portfolio)
+[![Open in Visual Studio Code](https://img.shields.io/static/v1?logo=visualstudiocode&label=&message=Open%20in%20Visual%20Studio%20Code&labelColor=2c2c32&color=007acc&logoColor=007acc)](https://vscode.dev/github/HDElectronics/vscode-portfolio)
 
-A Visual Studio Code themed developer portfolio website built with Next.js and deployed on Vercel.
+Ibrahim Khadraoui's Visual Studio Code themed portfolio, built with Next.js and deployed on Vercel.
 
 ![vscode-portfolio banner](https://imgur.com/JXJ9mpO.gif)
 

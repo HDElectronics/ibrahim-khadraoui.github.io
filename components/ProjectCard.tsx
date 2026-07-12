@@ -1,5 +1,6 @@
 import Image from 'next/image';
-import { VscLinkExternal } from 'react-icons/vsc';
+import Link from 'next/link';
+import { VscArrowRight } from 'react-icons/vsc';
 
 import { Project } from '@/types';
 
@@ -12,12 +13,7 @@ interface ProjectCardProps {
 
 const ProjectCard = ({ project, index }: ProjectCardProps) => {
   return (
-    <a
-      href={project.link}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={styles.card}
-    >
+    <Link href={project.link} className={styles.card}>
       <div className={styles.number}>
         <span>{String(index).padStart(2, '0')}</span>
       </div>
@@ -43,11 +39,11 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
         <div className={styles.action}>
           <span className={styles.link}>
             View Project
-            <VscLinkExternal size={12} />
+            <VscArrowRight size={12} />
           </span>
         </div>
       </div>
-    </a>
+    </Link>
   );
 };
 

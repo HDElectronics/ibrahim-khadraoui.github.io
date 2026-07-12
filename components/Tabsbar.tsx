@@ -19,6 +19,11 @@ const Tabsbar = () => {
         filename="github.md"
         path="/github"
       />
+      <Tab
+        icon="/logos/markdown_icon.svg"
+        filename="awards.md"
+        path="/awards"
+      />
     </div>
   );
 };

@@ -10,6 +10,21 @@ export const metadata: Metadata = {
   title: 'Projects',
 };
 
+const groups = [
+  {
+    id: 'professional',
+    label: 'Professional & Research',
+    blurb: 'Work at the Technology Innovation Institute and my Master’s thesis — VR teleoperation, on-device AI, autonomous racing, and robotics.',
+    items: projects.filter((p) => p.category === 'professional'),
+  },
+  {
+    id: 'hardware',
+    label: 'Hardware & PCB',
+    blurb: 'Personal embedded-systems and PCB projects built from scratch.',
+    items: projects.filter((p) => p.category !== 'professional'),
+  },
+];
+
 const ProjectsPage = () => {
   const totalProjects = projects.length;
 
@@ -25,30 +40,41 @@ const ProjectsPage = () => {
               <span className={styles.count}>{totalProjects} Projects</span>
             </div>
           </div>
-          
+
           <div className={styles.headerContent}>
             <h1 className={styles.title}>Featured Work</h1>
             <p className={styles.subtitle}>
-              A curated collection of projects I&apos;ve built. Each represents 
+              A curated collection of projects I&apos;ve built. Each represents
               a unique challenge and learning experience.
             </p>
           </div>
         </header>
 
-        <div className={styles.timeline}>
-          {projects.map((project, index) => (
-            <ProjectCard 
-              key={project.slug} 
-              project={project}
-              index={index + 1}
-            />
+        {groups
+          .filter((group) => group.items.length > 0)
+          .map((group) => (
+            <section key={group.id} className={styles.section}>
+              <div className={styles.sectionHeader}>
+                <h2 className={styles.sectionTitle}>{group.label}</h2>
+                <span className={styles.sectionCount}>{group.items.length}</span>
+              </div>
+              <p className={styles.sectionBlurb}>{group.blurb}</p>
+              <div className={styles.timeline}>
+                {group.items.map((project, index) => (
+                  <ProjectCard
+                    key={project.slug}
+                    project={project}
+                    index={index + 1}
+                  />
+                ))}
+              </div>
+            </section>
           ))}
-        </div>
 
         <footer className={styles.footer}>
           <div className={styles.footerLine} />
-          <a 
-            href="https://github.com/itsnitinr?tab=repositories"
+          <a
+            href="https://github.com/HDElectronics?tab=repositories"
             target="_blank"
             rel="noopener noreferrer"
             className={styles.footerLink}

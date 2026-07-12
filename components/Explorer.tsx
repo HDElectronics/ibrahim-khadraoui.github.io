@@ -36,6 +36,11 @@ const explorerItems = [
     path: '/github',
     icon: '/logos/markdown_icon.svg',
   },
+  {
+    name: 'awards.md',
+    path: '/awards',
+    icon: '/logos/markdown_icon.svg',
+  },
 ];
 
 const Explorer = () => {
