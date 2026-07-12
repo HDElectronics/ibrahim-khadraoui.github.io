@@ -1,0 +1,21 @@
+%% Falcon — Multimodal AI Pipeline on NVIDIA Jetson Orin
+%% Fully on-device: Whisper (ASR) + Vision-Language Model + Piper (TTS)
+flowchart TB
+    subgraph JETSON["NVIDIA Jetson Orin — fully on-device"]
+        direction TB
+        MIC["🎙️ Audio input<br/>(user question)"]
+        CAM["📷 Camera / image frame"]
+
+        MIC --> WHISPER["Whisper — ASR<br/>ONNX Runtime · CUDA EP<br/>INT8 / FP16"]
+        WHISPER -->|transcribed text| VLM
+
+        CAM -->|image context| VLM["Vision-Language Model<br/>text prompt + image<br/>TensorRT / llama.cpp"]
+
+        VLM -->|generated response text| PIPER["Piper — Neural TTS<br/>ONNX Runtime · streaming"]
+        PIPER --> SPK["🔊 Audio output<br/>(spoken answer)"]
+    end
+
+    classDef io fill:#1e293b,stroke:#38bdf8,color:#e2e8f0;
+    classDef model fill:#0f172a,stroke:#a78bfa,color:#e2e8f0;
+    class MIC,CAM,SPK io;
+    class WHISPER,VLM,PIPER model;

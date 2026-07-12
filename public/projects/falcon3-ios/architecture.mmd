@@ -1,0 +1,21 @@
+%% On-device iOS AI Assistant — conversational agent on iPhone (Apple Silicon)
+%% ASR + Falcon3 VLM (integrated via MLX) + TTS, fully on-device
+flowchart TB
+    subgraph IPHONE["iPhone — Apple Silicon · on-device (MLX)"]
+        direction TB
+        MIC["🎙️ Audio input<br/>(user question)"]
+        CAM["📷 Camera / image"]
+
+        MIC --> ASR["ASR<br/>speech -> text"]
+        ASR -->|transcribed text| VLM
+
+        CAM -->|image context| VLM["Falcon3 VLM<br/>integrated via MLX<br/>text prompt + image"]
+
+        VLM -->|response text| TTS["TTS<br/>text -> speech"]
+        TTS --> SPK["🔊 Audio output<br/>(spoken answer)"]
+    end
+
+    classDef io fill:#1e293b,stroke:#38bdf8,color:#e2e8f0;
+    classDef model fill:#0f172a,stroke:#a78bfa,color:#e2e8f0;
+    class MIC,CAM,SPK io;
+    class ASR,VLM,TTS model;
