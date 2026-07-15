@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { VscArrowLeft } from 'react-icons/vsc';
+import { VscArrowLeft, VscLinkExternal } from 'react-icons/vsc';
 
 import { projects } from '@/data/projects';
 
@@ -50,6 +50,17 @@ const ProjectDetailPage = async ({ params }: ProjectDetailPageProps) => {
               </span>
             ))}
           </div>
+          {project.externalUrl && (
+            <a
+              href={project.externalUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.externalLink}
+            >
+              <span>View on GitHub</span>
+              <VscLinkExternal size={14} />
+            </a>
+          )}
         </header>
 
         {project.images.length > 0 && (

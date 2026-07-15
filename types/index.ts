@@ -9,11 +9,12 @@ export interface Article {
   comments_count: number;
 }
 
-export type ProjectCategory = 'professional' | 'hardware';
+export type ProjectCategory = 'professional' | 'hardware' | 'hobby' | 'open-source';
 
 export interface Project {
   title: string;
   description: string;
+  hook?: string;
   logo: string;
   link: string;
   slug: string;
@@ -22,6 +23,8 @@ export interface Project {
   videos?: string[];
   category?: ProjectCategory;
   content?: ContentBlock[];
+  comingSoon?: boolean;
+  externalUrl?: string;
 }
 
 export interface Award {
