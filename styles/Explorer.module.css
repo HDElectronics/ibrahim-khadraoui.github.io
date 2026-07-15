@@ -1,9 +1,27 @@
 .explorer {
+  position: relative;
   background: var(--explorer-bg);
-  width: 18vw;
+  width: 220px;
+  flex-shrink: 0;
   color: rgb(225, 228, 232);
   font-family: 'Source Sans Pro', sans-serif;
   border-right: 1px solid var(--explorer-border);
+}
+
+.resizeHandle {
+  position: absolute;
+  top: 0;
+  right: -3px;
+  width: 6px;
+  height: 100%;
+  cursor: col-resize;
+  z-index: 10;
+  background: transparent;
+}
+
+.resizeHandle:hover,
+.resizeHandle:active {
+  background: rgba(var(--accent-color-rgb), 0.4);
 }
 
 .title {
@@ -56,18 +74,6 @@
 
 .chevron {
   transition: transform 0.2s;
-}
-
-@media screen and (min-width: 2000px) {
-  .explorer {
-    width: 10vw;
-  }
-}
-
-@media screen and (max-width: 900px) {
-  .explorer {
-    width: 20vw;
-  }
 }
 
 @media screen and (max-width: 600px) {
