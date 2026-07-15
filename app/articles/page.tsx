@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { VscBook, VscLinkExternal, VscGlobe } from 'react-icons/vsc';
+import { VscBook, VscGlobe } from 'react-icons/vsc';
 
 import WPArticleCard from '@/components/WPArticleCard';
 import { articles } from '@/data/articles';
@@ -37,16 +37,6 @@ export default function ArticlesPage() {
               </p>
             </div>
           </div>
-
-          <a
-            href="https://khadraouiibrahim.wordpress.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.profileLink}
-          >
-            <span>WordPress</span>
-            <VscLinkExternal size={14} />
-          </a>
         </header>
 
         <div className={styles.articlesList}>

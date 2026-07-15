@@ -2,11 +2,6 @@ import styles from '@/styles/ContactCode.module.css';
 
 const contactItems = [
   {
-    social: 'website',
-    link: 'khadraouiibrahim.wordpress.com',
-    href: 'https://khadraouiibrahim.wordpress.com',
-  },
-  {
     social: 'email',
     link: 'khadraouiibrahim@gmail.com',
     href: 'mailto:khadraouiibrahim@gmail.com',
