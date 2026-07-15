@@ -5,6 +5,7 @@ export const projects: Project[] = [
     title: 'UAV-XR — VR-Based Fleet Control',
     description:
       'A VR-based fleet management system at TII for teleoperating drones and ground robots over 4G/5G. Operators see a live 360° feed in a VR headset and drive the vehicle through a VR treadmill, joysticks, or a custom smart glove, with haptic feedback closing the loop.',
+    hook: 'Fly a drone in Abu Dhabi from a VR headset in Dubai — see through its eyes, steer with your body, feel it fly back.',
     logo: '/logos/chip.svg',
     link: '/projects/uav-xr',
     slug: 'uav-xr',
@@ -21,8 +22,8 @@ export const projects: Project[] = [
       '/projects/uav-xr/desert-test-night-1.jpg',
     ],
     videos: [
-      '/projects/uav-xr/gitex.mp4',
       '/projects/uav-xr/demo-desert.mp4',
+      '/projects/uav-xr/gitex.mp4',
       '/projects/uav-xr/smart-glove-drone-test.mp4',
       '/projects/uav-xr/hexa-drone-pid-calibration.mp4',
     ],
@@ -57,6 +58,7 @@ export const projects: Project[] = [
     title: 'Falcon — Multimodal AI on Jetson Orin',
     description:
       'A fully on-device multimodal AI pipeline on NVIDIA Jetson Orin, chaining Whisper (ASR), a Vision-Language Model, and Piper (TTS) into a real-time voice-in / voice-out assistant that can reason about what a camera sees — no cloud required.',
+    hook: 'A robot brain that can see, listen, and talk back — running entirely offline in the palm of your hand.',
     logo: '/logos/chip.svg',
     link: '/projects/falcon',
     slug: 'falcon',
@@ -82,6 +84,7 @@ export const projects: Project[] = [
     title: 'Falcon3 Multimodal Agent — iOS',
     description:
       'A fully on-device voice conversational agent on iPhone. I integrated our Falcon3 vision-language model on Apple’s MLX framework so it runs natively on Apple Silicon, wrapped with ASR and TTS for a complete speech-to-speech loop — offline, no API keys.',
+    hook: 'A full AI assistant living inside an iPhone with no internet connection — ask it what it sees, hear it answer back.',
     logo: '/logos/chip.svg',
     link: '/projects/falcon3-ios',
     slug: 'falcon3-ios',
@@ -109,6 +112,7 @@ export const projects: Project[] = [
     title: 'A2RL Smart Switching Camera',
     description:
       'A broadcast-automation system for A2RL autonomous racing at Yas Marina Circuit. I built the teams’ camera-management system: a from-scratch EMM client pulls each car’s live GPS, a CCTV coverage map plus a matching algorithm work out which camera frames each car, and every team is auto-routed its own car-locked stream.',
+    hook: 'Every self-driving race car gets its own personal cameraman — automatically, live, at race speed.',
     logo: '/logos/chip.svg',
     link: '/projects/a2rl-smart-camera',
     slug: 'a2rl-smart-camera',
@@ -135,6 +139,7 @@ export const projects: Project[] = [
     title: 'ICAR — Load-Carrying Follower Robot',
     description:
       'My Master’s thesis: an autonomous mobile robot that follows a person and carries their load, aimed at helping people with disabilities and the elderly. Person tracking uses Ultra-Wideband (DWM1000) radio and trilateration, fused with LIDAR and wheel encoders, on a ROS + Arduino Due stack.',
+    hook: 'A robot that follows you like a loyal companion and carries your bags — built to give people their independence back.',
     logo: '/logos/chip.svg',
     link: '/projects/icar',
     slug: 'icar',
@@ -168,6 +173,7 @@ export const projects: Project[] = [
     title: 'Contactless Hand Sanitizer',
     description:
       'A hand-detection sanitizer dispenser built around an ATmega328P. An E18-D80NK IR sensor detects a hand and signals the MCU to actuate a relay that runs the pump for a short burst of gel.',
+    hook: 'Wave your hand, get soap — zero touching, zero germs.',
     logo: '/logos/chip.svg',
     link: '/projects/contactless-hand-sanitizer',
     slug: 'contactless-hand-sanitizer',
@@ -193,6 +199,7 @@ export const projects: Project[] = [
     title: 'Fast Line Follower (BATLFOLLOWER)',
     description:
       'A high-speed autonomous line-following robot designed from scratch around an ATmega328P AU MCU.',
+    hook: 'A tiny robot racing along a painted line faster than the eye can follow.',
     logo: '/logos/chip.svg',
     link: '/projects/fast-line-follower',
     slug: 'fast-line-follower',
@@ -218,6 +225,7 @@ export const projects: Project[] = [
     title: 'Odometer',
     description:
       'An electronic odometer for cars that reads raw data from a wheel-mounted sensor (the type typically used for ABS) to calculate distance travelled.',
+    hook: 'Turns a spinning car wheel into an exact distance reading — no factory sensor required.',
     logo: '/logos/chip.svg',
     link: '/projects/odometer',
     slug: 'odometer',
@@ -240,6 +248,7 @@ export const projects: Project[] = [
     title: 'USB HID Gamepad',
     description:
       'A custom PCB built for a racing simulator, acting as a USB HID controller based on an ATmega328P.',
+    hook: 'Turns a home-built racing rig into a plug-and-play game controller your PC just recognizes.',
     logo: '/logos/chip.svg',
     link: '/projects/usb-hid-gamepad',
     slug: 'usb-hid-gamepad',
@@ -260,6 +269,7 @@ export const projects: Project[] = [
     title: 'PCB Business Card',
     description:
       'A functional PCB business card built around a microcontroller and 3 RGB LEDs for programmable lighting effects.',
+    hook: 'A business card that lights up — literally a tiny computer you hand someone at a networking event.',
     logo: '/logos/chip.svg',
     link: '/projects/pcb-business-card',
     slug: 'pcb-business-card',
@@ -282,6 +292,7 @@ export const projects: Project[] = [
     title: 'Other PCB Designs',
     description:
       'A collection of smaller PCBs designed for different tasks: a fast line follower V1, a LORA RA-01 carrier board, a DWM1000 UWB dev board, an enhanced Arduino UNO, an ATmega328P bootloader burner, and an 8x8 LED matrix.',
+    hook: 'A grab bag of circuit boards built from scratch — because sometimes you just have to make the chip do the thing.',
     logo: '/logos/chip.svg',
     link: '/projects/misc-pcb-designs',
     slug: 'misc-pcb-designs',
@@ -344,6 +355,110 @@ export const projects: Project[] = [
       {
         type: 'p',
         text: 'An 8x8 SMD LED matrix with a reprogrammable ATmega328P AU microcontroller and a MAX7219 LED driver IC.',
+      },
+    ],
+  },
+  {
+    title: 'ATC — Autonomous Person-Following Drone',
+    description:
+      'A hobby project: an end-to-end UAV system that makes a drone autonomously detect, track, and follow a person. YOLOv5 runs on-device on an RK3588 NPU, ByteTrack keeps a stable lock on the target, and a PID controller drives the drone through MAVSDK/PX4 — the exact same stack runs on a PX4 SITL simulator and the real drone.',
+    hook: 'Teaches a drone to spot a person from the sky and follow them on its own — no pilot, no joystick.',
+    logo: '/logos/chip.svg',
+    link: '/projects/atc',
+    slug: 'atc',
+    category: 'hobby',
+    tags: ['YOLOv5', 'RKNN', 'ByteTrack', 'MQTT', 'PX4', 'MAVSDK', 'Robotics'],
+    images: ['/projects/atc/architecture.svg'],
+    content: [
+      {
+        type: 'p',
+        text: 'ATC ("Aerial Traffic Control") is a hobby project built to make a drone follow a person completely on its own, from detection to flight control. A camera feed is run through YOLOv5 quantized and deployed on the RK3588’s NPU, ByteTrack assigns the tracked person a stable ID across frames, and the result is published over MQTT to a Python PID controller that turns it into velocity setpoints for PX4 via MAVSDK.',
+      },
+      { type: 'h3', text: 'Pipeline' },
+      { type: 'li', text: 'Detection — YOLOv5 trained on VisDrone, exported to ONNX then converted to RKNN, running in a C++ inference service on the NPU.' },
+      { type: 'li', text: 'Tracking — ByteTrack keeps a consistent ID on the followed person across frames.' },
+      { type: 'li', text: 'Messaging — MQTT is the backbone between detection/tracking and the flight controller, with identical topics in simulation and real flight.' },
+      { type: 'li', text: 'Control — a Python PID controller converts the tracked target’s position into velocity commands sent to PX4 through MAVSDK.' },
+      { type: 'h3', text: 'Simulator / real-drone parity' },
+      {
+        type: 'p',
+        text: 'Every service is designed to run identically on a PX4 SITL simulator and on the real drone — only the connection endpoint and camera source change (a UDP/RTSP sim URL vs. a real MAVSDK/RTSP-USB endpoint). The whole stack — broker, detection, tracker, controller, dashboard — comes up with one docker-compose file in both modes.',
+      },
+      { type: 'h3', text: 'Status' },
+      {
+        type: 'p',
+        text: 'Actively evolving: a one-shot training pipeline (data prep → train → export → RKNN convert), multi-dataset mixing tooling, splitting the tracker into its own service, and a web dashboard for configuration and control are next.',
+      },
+    ],
+  },
+  {
+    title: 'VLA Data & Evaluation Pipeline',
+    description:
+      'A project I’m currently building at work: the data and evaluation backbone for a Vision-Language-Action (VLA) model. I own data collection with a mobile AI robot from Tossenrobotics, the tooling to convert and upload collected episodes to the training cluster for the training team, and the tooling to pull trained checkpoints back down for inference and evaluation.',
+    hook: 'Building the pipeline that turns a robot’s real-world experience into the training data that teaches it new skills.',
+    logo: '/logos/chip.svg',
+    link: '/projects/vla-data-pipeline',
+    slug: 'vla-data-pipeline',
+    category: 'professional',
+    comingSoon: true,
+    tags: ['VLA', 'Robotics', 'Data Collection', 'Tossenrobotics', 'Evaluation', 'Inference'],
+    images: ['/projects/vla-data-pipeline/architecture.svg'],
+    content: [
+      {
+        type: 'p',
+        text: 'Currently in progress at work. I handle data collection for a Vision-Language-Action (VLA) model using a mobile AI robot from Tossenrobotics, plus the evaluation and inference side once a model is trained.',
+      },
+      { type: 'h3', text: 'What I’m building' },
+      { type: 'li', text: 'Data collection tooling on the Tossenrobotics mobile AI platform.' },
+      { type: 'li', text: 'Dataset conversion tools that turn raw collected episodes into a training-ready format.' },
+      { type: 'li', text: 'Upload tooling to hand the converted dataset off to the training cluster and training team.' },
+      { type: 'li', text: 'Download tooling to pull trained checkpoints back from the cluster.' },
+      { type: 'li', text: 'Evaluation and inference tooling to test those checkpoints.' },
+      { type: 'h3', text: 'Status' },
+      {
+        type: 'p',
+        text: 'Work in progress — full write-up, photos, and video coming once the project is further along.',
+      },
+    ],
+  },
+  {
+    title: 'llama.cpp — Falcon-H1 Hybrid Architecture Support',
+    description:
+      'Added support for the Falcon-H1 model family to llama.cpp — a hybrid Transformer + Mamba (State Space Model) architecture. Merged into master after 112 commits: conversion script tensor mapping, GGUF architecture registration, and inference graph construction for the hybrid attention/SSM layers.',
+    hook: 'Taught the most widely used open-source LLM runtime how to run a brand-new hybrid Transformer+Mamba model architecture.',
+    logo: '/logos/chip.svg',
+    link: '/projects/llama-cpp-falcon-h1',
+    slug: 'llama-cpp-falcon-h1',
+    category: 'open-source',
+    externalUrl: 'https://github.com/ggml-org/llama.cpp/pull/14534',
+    tags: ['llama.cpp', 'C++', 'GGUF', 'Mamba/SSM', 'Model Architecture', 'Open Source'],
+    images: [
+      '/projects/llama-cpp-falcon-h1/cover-llama-cpp.svg',
+      '/projects/llama-cpp-falcon-h1/falcon-h1-logo.png',
+    ],
+    content: [
+      {
+        type: 'p',
+        text: 'llama.cpp is the most widely used open-source runtime for local LLM inference. I contributed initial support for the Falcon-H1 model family — resolving issue #13681 — so the community could load and run these models. The PR (#14534) was merged into master after 112 commits of iterative refinement.',
+      },
+      { type: 'h3', text: 'Why Falcon-H1 needed new code' },
+      {
+        type: 'p',
+        text: 'Falcon-H1 is a hybrid architecture: it interleaves standard Transformer attention layers with Mamba-style State Space Model (SSM) layers in the same model. llama.cpp had no existing code path that understood this mix, so every layer of the stack — conversion, architecture registration, and the inference graph itself — needed new logic.',
+      },
+      { type: 'h3', text: 'Conversion: HuggingFace weights to GGUF' },
+      { type: 'li', text: 'Extended convert_hf_to_gguf.py with Falcon-H1-specific tensor mapping and hyperparameter extraction from the original HuggingFace config.' },
+      { type: 'li', text: 'Handled tied embedding weights across layers and the SSM-specific scan/state matrices during conversion.' },
+      { type: 'li', text: 'Registered new GGUF architecture constants in gguf-py/gguf/constants.py.' },
+      { type: 'h3', text: 'Architecture registration and inference in C++' },
+      { type: 'li', text: 'llama-arch.cpp — registered the Falcon-H1 architecture definition.' },
+      { type: 'li', text: 'llama-hparams.cpp / llama-model-loader.cpp — added the hyperparameter structures and tensor-loading logic the hybrid layers need.' },
+      { type: 'li', text: 'llama-model.cpp — built the actual inference graph: mixed-precision multipliers stored as float64 for numerical accuracy, SSM state integration with configurable inner dimensions, pre-norm/FFN-specific normalization, and RoPE positional encoding.' },
+      { type: 'li', text: 'llama-vocab.cpp — added an automatic tokenizer fallback for models shipped without complete tokenizer files.' },
+      { type: 'h3', text: 'Outcome' },
+      {
+        type: 'p',
+        text: 'Falcon-H1 models — including the larger 34B variant, which needed special SSM-norm reshaping — now load and run in llama.cpp like any other supported architecture, on CPU or GPU, with no separate runtime required.',
       },
     ],
   },

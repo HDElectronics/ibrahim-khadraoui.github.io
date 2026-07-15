@@ -18,10 +18,22 @@ const groups = [
     items: projects.filter((p) => p.category === 'professional'),
   },
   {
+    id: 'hobby',
+    label: 'Hobby & Side Projects',
+    blurb: 'Personal robotics builds outside work — full systems designed and shipped for fun.',
+    items: projects.filter((p) => p.category === 'hobby'),
+  },
+  {
+    id: 'open-source',
+    label: 'Open Source Contributions',
+    blurb: 'Code I’ve contributed back to widely used open-source projects.',
+    items: projects.filter((p) => p.category === 'open-source'),
+  },
+  {
     id: 'hardware',
     label: 'Hardware & PCB',
     blurb: 'Personal embedded-systems and PCB projects built from scratch.',
-    items: projects.filter((p) => p.category !== 'professional'),
+    items: projects.filter((p) => p.category === 'hardware'),
   },
 ];
 
