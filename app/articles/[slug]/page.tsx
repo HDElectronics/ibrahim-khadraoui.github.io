@@ -92,6 +92,12 @@ const ArticleDetailPage = async ({ params }: ArticleDetailPageProps) => {
                     {block.text}
                   </p>
                 );
+              case 'li':
+                return (
+                  <p key={index} className={styles.blockP}>
+                    • {block.text}
+                  </p>
+                );
               case 'img':
                 return (
                   <div key={index} className={styles.blockImageWrapper}>
@@ -102,6 +108,20 @@ const ArticleDetailPage = async ({ params }: ArticleDetailPageProps) => {
                       height={450}
                       className={styles.blockImage}
                     />
+                  </div>
+                );
+              case 'video':
+                return (
+                  <div key={index} className={styles.blockImageWrapper}>
+                    <video
+                      key={index}
+                      className={styles.blockImage}
+                      controls
+                      preload="metadata"
+                      playsInline
+                    >
+                      <source src={block.src} type="video/mp4" />
+                    </video>
                   </div>
                 );
               default:

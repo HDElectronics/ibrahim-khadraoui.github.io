@@ -38,7 +38,7 @@ export interface Award {
 }
 
 export interface ContentBlock {
-  type: 'h2' | 'h3' | 'h4' | 'p' | 'li' | 'img';
+  type: 'h2' | 'h3' | 'h4' | 'p' | 'li' | 'img' | 'video';
   text?: string;
   src?: string;
 }
