@@ -1,27 +1,21 @@
 import Container from '@/components/Container';
+import { profile } from '@/data/profile';
 
 import styles from '@/styles/SiteFooter.module.css';
-
-const LINKS = [
-  { href: 'https://github.com/HDElectronics', label: 'GitHub' },
-  { href: 'https://www.linkedin.com/in/ibrahim-khadraoui/', label: 'LinkedIn' },
-  { href: 'https://www.researchgate.net/profile/Ibrahim-Khadraoui', label: 'ResearchGate' },
-  { href: 'mailto:khadraouiibrahim@gmail.com', label: 'Email' },
-];
 
 const SiteFooter = () => (
   <footer className={styles.footer}>
     <Container className={styles.inner}>
       <div className={styles.links}>
-        {LINKS.map((link) => (
+        {profile.socials.map((social) => (
           <a
-            key={link.href}
-            href={link.href}
+            key={social.url}
+            href={social.url}
             target="_blank"
             rel="noopener noreferrer"
             className={styles.link}
           >
-            {link.label}
+            {social.label}
           </a>
         ))}
       </div>

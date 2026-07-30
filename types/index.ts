@@ -71,3 +71,71 @@ export interface User {
   public_repos: number;
   followers: number;
 }
+
+export type SocialIcon = 'github' | 'linkedin' | 'mail' | 'link';
+
+export interface SocialLink {
+  label: string;
+  url: string;
+  icon: SocialIcon;
+}
+
+export interface Profile {
+  name: string;
+  tagline: string;
+  shortBio: string;
+  email: string;
+  resumeUrl: string;
+  socials: SocialLink[];
+}
+
+export interface ExperienceRole {
+  title: string;
+  period: string;
+}
+
+export interface ExperienceFocus {
+  label: string;
+  period?: string;
+  bullets: string[];
+}
+
+export interface Experience {
+  company: string;
+  location: string;
+  period: string;
+  roles: ExperienceRole[];
+  focuses: ExperienceFocus[];
+  tags: string[];
+}
+
+export interface Education {
+  degree: string;
+  institution: string;
+  date: string;
+  detail?: string;
+}
+
+export interface Publication {
+  title: string;
+  venue: string;
+  date: string;
+  url?: string;
+}
+
+export interface SkillGroup {
+  label: string;
+  items: string[];
+}
+
+export interface Hobby {
+  title: string;
+  text: string;
+}
+
+export interface About {
+  bioParagraphs: string[];
+  skillGroups: SkillGroup[];
+  hobbies: Hobby[];
+  languages: string[];
+}
