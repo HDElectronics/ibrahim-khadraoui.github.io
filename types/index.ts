@@ -113,3 +113,10 @@ export interface MediaItem {
   type: 'img' | 'video';
   src: string;
 }
+
+export interface Story {
+  title: string;
+  date: string;
+  text?: string;
+  media: MediaItem[];
+}

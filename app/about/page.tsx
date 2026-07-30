@@ -2,12 +2,19 @@ import { Metadata } from 'next';
 
 import Container from '@/components/Container';
 import GithubActivity from '@/components/GithubActivity';
+import MediaCarousel from '@/components/MediaCarousel';
 import { about } from '@/data/about';
 import { publications } from '@/data/publications';
 import { awards } from '@/data/awards';
 import { profile } from '@/data/profile';
+import { Award, MediaItem } from '@/types';
 
 import styles from '@/styles/AboutPage.module.css';
+
+const awardMedia = (award: Award): MediaItem[] => [
+  ...(award.images ?? []).map((src) => ({ type: 'img' as const, src })),
+  ...(award.videos ?? []).map((src) => ({ type: 'video' as const, src })),
+];
 
 export const metadata: Metadata = {
   title: 'About',
@@ -77,25 +84,11 @@ const AboutPage = () => (
               {award.organization} · {award.date}
             </span>
             <p className={styles.awardText}>{award.description}</p>
-            {(award.images?.length || award.videos?.length) ? (
+            {awardMedia(award).length > 0 && (
               <div className={styles.awardMedia}>
-                {award.images?.map((src) => (
-                  /* eslint-disable-next-line @next/next/no-img-element */
-                  <img key={src} src={src} alt={award.title} className={styles.media} />
-                ))}
-                {award.videos?.map((src) => (
-                  <video
-                    key={src}
-                    className={styles.media}
-                    controls
-                    preload="metadata"
-                    playsInline
-                  >
-                    <source src={src} type="video/mp4" />
-                  </video>
-                ))}
+                <MediaCarousel items={awardMedia(award)} alt={award.title} />
               </div>
-            ) : null}
+            )}
           </li>
         ))}
       </ul>
