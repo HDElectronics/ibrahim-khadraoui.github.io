@@ -24,7 +24,12 @@ bunx eslint .      # lint                                 -> must exit 0
 
 Plus a visual check on `bun run dev` (http://localhost:3000) at 375px and 1440px widths, in **both** themes, for every route the task touched.
 
-Note: `bun run lint` is **broken on this repo today** — the script is `next lint`, and `next lint` was removed in Next.js 16. Task 10 fixes the script. Until then, use `bunx eslint .` directly.
+Two corrections found during execution — they apply to every `bun`/`bunx` command below:
+
+1. **`bun` is not installed on this machine** (only `npm`/`npx`, node v26). Read every `bun run X` in this plan as `npm run X`, and every `bunx X` as `npx X`. The committed `bun.lock` is not usable here.
+2. `npm run lint` is **broken on this repo today** — the script is `next lint`, and `next lint` was removed in Next.js 16. Task 10 fixes the script. Until then, use `npx eslint .` directly.
+
+Also: `eslint.config.mjs` has no `ignores` entry, so `npx eslint .` walks a stale `.next/` directory and errors. Task 10 adds `{ ignores: ['.next/**', 'node_modules/**'] }` to the flat config alongside the lint-script fix.
 
 Do not mark a task complete if `bun run build` fails.
 
