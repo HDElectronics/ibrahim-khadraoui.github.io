@@ -4,7 +4,9 @@ import { notFound } from 'next/navigation';
 
 import Container from '@/components/Container';
 import ContentBlocks from '@/components/ContentBlocks';
+import MediaCarousel from '@/components/MediaCarousel';
 import { projects } from '@/data/projects';
+import { MediaItem } from '@/types';
 
 import styles from '@/styles/ProjectDetailPage.module.css';
 
@@ -35,6 +37,11 @@ const ProjectDetailPage = async ({ params }: ProjectDetailPageProps) => {
     notFound();
   }
 
+  const galleryItems: MediaItem[] = [
+    ...project.images.map((src) => ({ type: 'img' as const, src })),
+    ...(project.videos ?? []).map((src) => ({ type: 'video' as const, src })),
+  ];
+
   return (
     <Container className={styles.page}>
       <Link href="/projects" className={styles.back}>
@@ -61,24 +68,10 @@ const ProjectDetailPage = async ({ params }: ProjectDetailPageProps) => {
         <ContentBlocks blocks={project.content} alt={project.title} />
       )}
 
-      {(project.images.length > 0 || (project.videos?.length ?? 0) > 0) && (
+      {galleryItems.length > 0 && (
         <section className={styles.gallery}>
           <h2 className={styles.galleryTitle}>Gallery</h2>
-          {project.images.map((src) => (
-            /* eslint-disable-next-line @next/next/no-img-element */
-            <img key={src} src={src} alt={project.title} className={styles.media} />
-          ))}
-          {project.videos?.map((src) => (
-            <video
-              key={src}
-              className={styles.media}
-              controls
-              preload="metadata"
-              playsInline
-            >
-              <source src={src} type="video/mp4" />
-            </video>
-          ))}
+          <MediaCarousel items={galleryItems} alt={project.title} />
         </section>
       )}
     </Container>
