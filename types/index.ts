@@ -108,3 +108,8 @@ export interface About {
   hobbies: Hobby[];
   languages: string[];
 }
+
+export interface MediaItem {
+  type: 'img' | 'video';
+  src: string;
+}
