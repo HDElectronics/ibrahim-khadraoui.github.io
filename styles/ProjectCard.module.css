@@ -1,223 +1,56 @@
-/* Project Card - big hero image + hook */
-
 .card {
-  display: flex;
-  flex-direction: column;
-  text-decoration: none;
-  position: relative;
-  border-radius: 14px;
-  border: 1px solid var(--explorer-border);
-  background: rgba(255, 255, 255, 0.015);
-  overflow: hidden;
-  transition: all 0.3s ease;
+  display: grid;
+  gap: var(--s3);
+  padding: var(--s3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg);
+  transition: border-color var(--t-color);
 }
 
 .card:hover {
-  border-color: rgba(var(--accent-color-rgb), 0.35);
-  transform: translateY(-3px);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+  border-color: var(--accent);
 }
 
-.hero {
+.thumb {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 9;
-  background: rgba(255, 255, 255, 0.03);
+  aspect-ratio: 16 / 10;
   overflow: hidden;
+  border-radius: var(--radius);
+  background: var(--bg-subtle);
 }
 
-.heroMedia {
-  width: 100%;
-  height: 100%;
+.image {
   object-fit: cover;
-  transition: transform 0.4s ease;
 }
 
-.card:hover .heroMedia {
-  transform: scale(1.04);
-}
-
-.heroMediaDiagram {
-  object-fit: contain;
-  padding: 14px;
-}
-
-.card:hover .heroMediaDiagram {
-  transform: none;
-}
-
-.heroPlaceholder {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  color: rgba(255, 255, 255, 0.3);
-  background: linear-gradient(135deg, rgba(var(--accent-color-rgb), 0.08), rgba(255, 255, 255, 0.02));
-  font-size: 13px;
-  font-family: var(--font-mono);
-}
-
-.number {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: rgba(13, 17, 23, 0.65);
-  backdrop-filter: blur(4px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.number span {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: rgba(255, 255, 255, 0.8);
-  font-weight: 500;
-}
-
-.comingSoonBadge {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  padding: 5px 10px;
-  border-radius: 20px;
-  font-size: 11px;
-  font-weight: 600;
-  color: #0d1117;
-  background: var(--accent-color);
-}
-
-.content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  padding: 20px 22px 22px;
-}
-
-.main {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.logoWrapper {
-  width: 26px;
-  height: 26px;
-  border-radius: 7px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.logo {
-  width: 16px;
-  height: 16px;
-  object-fit: contain;
+.body {
+  display: grid;
+  gap: var(--s2);
 }
 
 .title {
-  margin: 0;
-  font-size: 18px;
-  font-weight: 600;
-  color: var(--text-color);
-  transition: color 0.2s ease;
+  font-size: var(--fs-md);
 }
 
-.card:hover .title {
-  color: var(--accent-color);
-}
-
-.hook {
-  margin: 0;
-  font-size: 15px;
-  line-height: 1.5;
-  font-weight: 500;
-  color: var(--text-color);
-}
-
-.description {
-  margin: 0;
-  font-size: 13.5px;
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.5);
+.text {
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
 }
 
 .tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 2px;
-}
-
-.tag {
-  font-size: 11px;
   font-family: var(--font-mono);
-  color: rgba(255, 255, 255, 0.55);
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid var(--explorer-border);
-  border-radius: 20px;
-  padding: 3px 9px;
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
 }
 
-.action {
-  display: flex;
-  margin-top: 4px;
-}
-
-.link {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 12px;
-  color: var(--accent-color);
-  font-weight: 500;
-  opacity: 0;
-  transform: translateX(-10px);
-  transition: all 0.3s ease;
-}
-
-.card:hover .link {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-/* Responsive */
-@media (max-width: 640px) {
-  .content {
-    padding: 16px 18px 18px;
-  }
-
-  .title {
-    font-size: 16px;
-  }
-
-  .hook {
-    font-size: 14px;
-  }
-
-  .description {
-    font-size: 13px;
-  }
-
-  .link {
-    opacity: 1;
-    transform: none;
-  }
+.badge {
+  justify-self: start;
+  padding: var(--s1) var(--s2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
 }
