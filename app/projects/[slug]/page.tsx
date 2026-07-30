@@ -1,9 +1,9 @@
 import { Metadata } from 'next';
-import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { VscArrowLeft, VscLinkExternal } from 'react-icons/vsc';
 
+import Container from '@/components/Container';
+import ContentBlocks from '@/components/ContentBlocks';
 import { projects } from '@/data/projects';
 
 import styles from '@/styles/ProjectDetailPage.module.css';
@@ -21,7 +21,10 @@ export async function generateMetadata({
 }: ProjectDetailPageProps): Promise<Metadata> {
   const { slug } = await params;
   const project = projects.find((p) => p.slug === slug);
-  return { title: project?.title ?? 'Project' };
+  return {
+    title: project?.title ?? 'Project',
+    description: project?.description,
+  };
 }
 
 const ProjectDetailPage = async ({ params }: ProjectDetailPageProps) => {
@@ -33,121 +36,52 @@ const ProjectDetailPage = async ({ params }: ProjectDetailPageProps) => {
   }
 
   return (
-    <div className={styles.page}>
-      <div className={styles.container}>
-        <Link href="/projects" className={styles.back}>
-          <VscArrowLeft size={14} />
-          <span>Back to Projects</span>
-        </Link>
+    <Container className={styles.page}>
+      <Link href="/projects" className={styles.back}>
+        ← Back to projects
+      </Link>
 
-        <header className={styles.header}>
-          <h1 className={styles.title}>{project.title}</h1>
-          <p className={styles.description}>{project.description}</p>
-          <div className={styles.tags}>
-            {project.tags.map((tag) => (
-              <span key={tag} className={styles.tag}>
-                {tag}
-              </span>
-            ))}
-          </div>
-          {project.externalUrl && (
-            <a
-              href={project.externalUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.externalLink}
+      <header className={styles.header}>
+        <h1 className={styles.title}>{project.title}</h1>
+        <p className={styles.description}>{project.description}</p>
+        <p className={styles.tags}>{project.tags.join(' · ')}</p>
+        {project.externalUrl && (
+          <a
+            href={project.externalUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.external}
+          >
+            View source on GitHub →
+          </a>
+        )}
+      </header>
+
+      {project.content && (
+        <ContentBlocks blocks={project.content} alt={project.title} />
+      )}
+
+      {(project.images.length > 0 || (project.videos?.length ?? 0) > 0) && (
+        <section className={styles.gallery}>
+          <h2 className={styles.galleryTitle}>Gallery</h2>
+          {project.images.map((src) => (
+            /* eslint-disable-next-line @next/next/no-img-element */
+            <img key={src} src={src} alt={project.title} className={styles.media} />
+          ))}
+          {project.videos?.map((src) => (
+            <video
+              key={src}
+              className={styles.media}
+              controls
+              preload="metadata"
+              playsInline
             >
-              <span>View on GitHub</span>
-              <VscLinkExternal size={14} />
-            </a>
-          )}
-        </header>
-
-        {project.images.length > 0 && (
-          <div className={styles.gallery}>
-            {project.images.map((src) => (
-              <div key={src} className={styles.imageWrapper}>
-                <Image
-                  src={src}
-                  alt={project.title}
-                  width={600}
-                  height={450}
-                  className={styles.image}
-                />
-              </div>
-            ))}
-          </div>
-        )}
-
-        {project.videos && project.videos.length > 0 && (
-          <div className={styles.videos}>
-            {project.videos.map((src) => (
-              <video
-                key={src}
-                className={styles.video}
-                controls
-                preload="metadata"
-                playsInline
-              >
-                <source src={src} type="video/mp4" />
-              </video>
-            ))}
-          </div>
-        )}
-
-        {project.content && (
-          <div className={styles.content}>
-            {project.content.map((block, index) => {
-              switch (block.type) {
-                case 'h2':
-                  return (
-                    <h2 key={index} className={styles.blockH2}>
-                      {block.text}
-                    </h2>
-                  );
-                case 'h3':
-                  return (
-                    <h3 key={index} className={styles.blockH3}>
-                      {block.text}
-                    </h3>
-                  );
-                case 'h4':
-                  return (
-                    <h4 key={index} className={styles.blockH4}>
-                      {block.text}
-                    </h4>
-                  );
-                case 'li':
-                  return (
-                    <p key={index} className={styles.blockLi}>
-                      {block.text}
-                    </p>
-                  );
-                case 'img':
-                  return block.src ? (
-                    <div key={index} className={styles.imageWrapper}>
-                      <Image
-                        src={block.src}
-                        alt={project.title}
-                        width={600}
-                        height={450}
-                        className={styles.image}
-                      />
-                    </div>
-                  ) : null;
-                case 'p':
-                default:
-                  return (
-                    <p key={index} className={styles.blockP}>
-                      {block.text}
-                    </p>
-                  );
-              }
-            })}
-          </div>
-        )}
-      </div>
-    </div>
+              <source src={src} type="video/mp4" />
+            </video>
+          ))}
+        </section>
+      )}
+    </Container>
   );
 };
 

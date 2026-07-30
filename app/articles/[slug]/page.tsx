@@ -1,9 +1,9 @@
 import { Metadata } from 'next';
-import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { VscArrowLeft, VscCalendar } from 'react-icons/vsc';
 
+import Container from '@/components/Container';
+import ContentBlocks from '@/components/ContentBlocks';
 import { articles } from '@/data/articles';
 
 import styles from '@/styles/ArticleDetailPage.module.css';
@@ -21,7 +21,10 @@ export async function generateMetadata({
 }: ArticleDetailPageProps): Promise<Metadata> {
   const { slug } = await params;
   const article = articles.find((a) => a.slug === slug);
-  return { title: article?.title ?? 'Article' };
+  return {
+    title: article?.title ?? 'Article',
+    description: article?.excerpt,
+  };
 }
 
 const ArticleDetailPage = async ({ params }: ArticleDetailPageProps) => {
@@ -33,104 +36,24 @@ const ArticleDetailPage = async ({ params }: ArticleDetailPageProps) => {
   }
 
   return (
-    <div className={styles.page}>
-      <div className={styles.container}>
-        <Link href="/articles" className={styles.back}>
-          <VscArrowLeft size={14} />
-          <span>Back to Articles</span>
-        </Link>
+    <Container className={styles.page}>
+      <Link href="/articles" className={styles.back}>
+        ← Back to articles
+      </Link>
 
-        <header className={styles.header}>
-          <h1 className={styles.title}>{article.title}</h1>
-          <div className={styles.meta}>
-            <VscCalendar size={13} />
-            <span>
-              {new Date(article.date).toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-              })}
-            </span>
-          </div>
-        </header>
-
-        <div className={styles.coverWrapper}>
-          <Image
-            src={article.cover}
-            alt={article.title}
-            width={800}
-            height={450}
-            className={styles.cover}
-            priority
-          />
-        </div>
-
-        <div className={styles.content}>
-          {article.content.map((block, index) => {
-            switch (block.type) {
-              case 'h2':
-                return (
-                  <h2 key={index} className={styles.blockH2}>
-                    {block.text}
-                  </h2>
-                );
-              case 'h3':
-                return (
-                  <h3 key={index} className={styles.blockH3}>
-                    {block.text}
-                  </h3>
-                );
-              case 'h4':
-                return (
-                  <h4 key={index} className={styles.blockH4}>
-                    {block.text}
-                  </h4>
-                );
-              case 'p':
-                return (
-                  <p key={index} className={styles.blockP}>
-                    {block.text}
-                  </p>
-                );
-              case 'li':
-                return (
-                  <p key={index} className={styles.blockP}>
-                    • {block.text}
-                  </p>
-                );
-              case 'img':
-                return (
-                  <div key={index} className={styles.blockImageWrapper}>
-                    <Image
-                      src={block.src!}
-                      alt={article.title}
-                      width={800}
-                      height={450}
-                      className={styles.blockImage}
-                    />
-                  </div>
-                );
-              case 'video':
-                return (
-                  <div key={index} className={styles.blockImageWrapper}>
-                    <video
-                      key={index}
-                      className={styles.blockImage}
-                      controls
-                      preload="metadata"
-                      playsInline
-                    >
-                      <source src={block.src} type="video/mp4" />
-                    </video>
-                  </div>
-                );
-              default:
-                return null;
-            }
+      <header className={styles.header}>
+        <h1 className={styles.title}>{article.title}</h1>
+        <p className={styles.meta}>
+          {new Date(article.date).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
           })}
-        </div>
-      </div>
-    </div>
+        </p>
+      </header>
+
+      <ContentBlocks blocks={article.content} alt={article.title} />
+    </Container>
   );
 };
 
