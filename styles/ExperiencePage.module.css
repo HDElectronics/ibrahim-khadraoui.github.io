@@ -1,0 +1,162 @@
+.page {
+  padding-block: var(--s5);
+}
+
+.header {
+  margin-bottom: var(--s6);
+}
+
+.title {
+  font-size: var(--fs-xl);
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  margin-top: var(--s2);
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+}
+
+.timeline {
+  list-style: none;
+  display: grid;
+  gap: var(--s6);
+}
+
+.entry {
+  display: grid;
+  gap: var(--s4);
+}
+
+.entryHead {
+  display: grid;
+  gap: var(--s1);
+}
+
+.company {
+  font-size: var(--fs-lg);
+}
+
+.meta {
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+}
+
+.roles {
+  list-style: none;
+  display: grid;
+  gap: var(--s1);
+  padding-left: var(--s3);
+  border-left: 1px solid var(--border);
+}
+
+.role {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s2);
+  align-items: baseline;
+}
+
+.roleTitle {
+  font-weight: 600;
+  font-size: var(--fs-sm);
+}
+
+.rolePeriod {
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+}
+
+.focus {
+  display: grid;
+  gap: var(--s3);
+}
+
+.focusLabel {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--s2);
+  font-size: var(--fs-md);
+  color: var(--accent);
+}
+
+.focusPeriod {
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+}
+
+.bullets {
+  display: grid;
+  gap: var(--s2);
+  padding-left: var(--s4);
+}
+
+.bullet {
+  max-width: var(--measure);
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s2);
+}
+
+.tag {
+  padding: 2px var(--s2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+}
+
+.section {
+  margin-top: var(--s6);
+  display: grid;
+  gap: var(--s4);
+}
+
+.sectionTitle {
+  font-size: var(--fs-lg);
+}
+
+.education {
+  list-style: none;
+  display: grid;
+  gap: var(--s4);
+}
+
+.educationItem {
+  display: grid;
+  gap: var(--s1);
+}
+
+.degree {
+  font-weight: 600;
+}
+
+.detail {
+  max-width: var(--measure);
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+}
+
+.resume {
+  display: inline-block;
+  margin-top: var(--s5);
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  color: var(--accent);
+}
+
+.resume:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
