@@ -36,16 +36,14 @@ a {
   text-decoration: none;
 }
 
-p a,
-li a {
+p a {
   text-decoration: underline;
   text-underline-offset: 3px;
   text-decoration-color: var(--border);
   transition: color var(--t-color), text-decoration-color var(--t-color);
 }
 
-p a:hover,
-li a:hover {
+p a:hover {
   color: var(--accent);
   text-decoration-color: var(--accent);
 }
