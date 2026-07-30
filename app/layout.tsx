@@ -20,12 +20,43 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://ibrahim-khadraoui-portfolio-seven.vercel.app'),
   title: {
-    default: 'Ibrahim Khadraoui | Portfolio',
+    default: 'Ibrahim Khadraoui | AI / ML Systems Engineer',
     template: 'Ibrahim Khadraoui | %s',
   },
   description:
-    'Ibrahim Khadraoui is an AI / ML systems engineer working on edge inference and embodied AI.',
+    'Ibrahim Khadraoui is an AI / ML systems engineer working on edge inference and embodied AI — taking research models to production on robots and edge devices.',
+  keywords: [
+    'ibrahim khadraoui',
+    'ai systems engineer',
+    'ml systems engineer',
+    'edge inference',
+    'embodied ai',
+    'vision language action',
+    'llama.cpp',
+    'tensorrt',
+    'mlx',
+    'robotics engineer',
+    'embedded systems engineer',
+    'pcb design',
+    'hdelectronics',
+  ],
+  openGraph: {
+    type: 'website',
+    title: 'Ibrahim Khadraoui | AI / ML Systems Engineer',
+    description:
+      'Edge inference and embodied AI — taking research models to production on robots and edge devices.',
+    url: '/',
+    images: ['/og.png'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Ibrahim Khadraoui | AI / ML Systems Engineer',
+    description:
+      'Edge inference and embodied AI — taking research models to production on robots and edge devices.',
+    images: ['/og.png'],
+  },
 };
 
 const themeScript = `

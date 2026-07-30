@@ -1,37 +1,44 @@
-# vscode-portfolio
-[![Open in Visual Studio Code](https://img.shields.io/static/v1?logo=visualstudiocode&label=&message=Open%20in%20Visual%20Studio%20Code&labelColor=2c2c32&color=007acc&logoColor=007acc)](https://vscode.dev/github/HDElectronics/vscode-portfolio)
+# ibrahim-portfolio
 
-Ibrahim Khadraoui's Visual Studio Code themed portfolio, built with Next.js and deployed on Vercel.
+Ibrahim Khadraoui's portfolio — a simple, text-first site for an AI / ML systems engineer working on edge inference and embodied AI, built with Next.js and deployed on Vercel.
 
-![vscode-portfolio banner](https://imgur.com/JXJ9mpO.gif)
+## Stack
 
-## Features Roadmap
+- [Next.js](https://nextjs.org/) (App Router)
+- React 19
+- TypeScript
+- CSS Modules
 
-- [ ] Themes and customizations
-  - [x] GitHub Dark (default)
-  - [ ] One Dark Pro
-  - [x] Dracula
-  - [x] Ayu
-  - [x] Nord
-- [x] Interactive custom terminal
+Content lives in typed data files under `data/` (profile, experience, projects, articles, publications, awards, education) rather than in a CMS, so pages stay static and content changes are plain TypeScript edits.
 
-For other features and themes suggestions, please open an issue.
+## Routes
 
-## Environment Variables
+- `/` — home
+- `/projects` — project list
+- `/projects/[slug]` — individual project
+- `/experience` — work experience
+- `/articles` — article list
+- `/articles/[slug]` — individual article
+- `/about` — about, publications, awards, GitHub activity
+- `/contact` — contact channels
 
-For fetching your articles from dev.to, create an `.env.local` file inside the project directory. Check the `.env.local.example` file for more information.
+The site also ships a dark/light theme toggle, persisted per visitor.
 
-## Running Development Server
+## Running the development server
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-All VSCode related components can be found in the `components` folder. To change the content of the portfolio, check out the `pages` folder. To add or remove pages, modify `components/Sidebar.jsx` and `components/Tabsbar.jsx`.
+## Other commands
+
+```bash
+npm run build   # production build
+npm run lint    # lint app, components, data, and types
+```
 
 ## Next.js Resources
 
@@ -47,3 +54,7 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## License
+
+MIT — see [LICENSE](./LICENSE). Originally based on the [vscode-portfolio](https://github.com/itsnitinr/vscode-portfolio) template by Nitin Ranganath.
