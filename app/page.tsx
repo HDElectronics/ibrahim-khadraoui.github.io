@@ -1,68 +1,89 @@
-'use client';
-
 import Link from 'next/link';
-import { VscArrowRight, VscGithub, VscMail, VscCode } from 'react-icons/vsc';
+
+import Container from '@/components/Container';
+import { profile } from '@/data/profile';
+import { projects } from '@/data/projects';
+import { articles } from '@/data/articles';
 
 import styles from '@/styles/HomePage.module.css';
 
-export default function HomePage() {
+const HomePage = () => {
+  const selected = projects.slice(0, 3);
+  const latest = articles.slice(0, 2);
+
   return (
-    <div className={styles.page}>
-      <div className={styles.container}>
-        <div className={styles.content}>
-          <div className={styles.header}>
-            <div className={styles.icon}>
-              <VscCode size={32} />
-            </div>
-          </div>
+    <Container className={styles.page}>
+      <section className={styles.hero}>
+        <h1 className={styles.name}>{profile.name}</h1>
+        <p className={styles.tagline}>{profile.tagline}</p>
+        <p className={styles.bio}>{profile.shortBio}</p>
+      </section>
 
-          <div className={styles.intro}>
-            <p className={styles.greeting}>Hello, I&apos;m</p>
-
-            <h1 className={styles.name}>Ibrahim Khadraoui</h1>
-
-            <p className={styles.role}>Embedded Systems Engineer</p>
-
-            <div className={styles.divider} />
-
-            <p className={styles.description}>
-              I design and build custom PCBs, from schematic to layout to
-              bring-up. Specialized in ATmega328P and STM32-based boards,
-              sensor interfacing, and motor control.
-            </p>
-          </div>
-
-          <div className={styles.actions}>
-            <Link href="/projects" className={styles.primaryAction}>
-              <span>View Projects</span>
-              <VscArrowRight size={18} />
-            </Link>
-            
-            <Link href="/about" className={styles.secondaryAction}>
-              <span>Learn More</span>
-            </Link>
-          </div>
-
-          <div className={styles.links}>
-            <a
-              href="https://github.com/HDElectronics"
-              target="_blank" 
-              rel="noopener noreferrer"
-              className={styles.link}
-            >
-              <VscGithub size={16} />
-              <span>GitHub</span>
-            </a>
-            
-            <span className={styles.linkSeparator}>/</span>
-            
-            <Link href="/contact" className={styles.link}>
-              <VscMail size={16} />
-              <span>Contact</span>
-            </Link>
-          </div>
+      <section className={styles.section}>
+        <div className={styles.sectionHead}>
+          <h2 className={styles.sectionTitle}>Selected work</h2>
+          <Link href="/projects" className={styles.seeAll}>
+            all projects →
+          </Link>
         </div>
-      </div>
-    </div>
+
+        <ul className={styles.list}>
+          {selected.map((project) => (
+            <li key={project.slug}>
+              <Link href={project.link} className={styles.row}>
+                <span className={styles.rowTitle}>{project.title}</span>
+                <span className={styles.rowText}>
+                  {project.hook ?? project.description}
+                </span>
+                <span className={styles.rowTags}>
+                  {project.tags.slice(0, 4).join(' · ')}
+                </span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section className={styles.section}>
+        <div className={styles.sectionHead}>
+          <h2 className={styles.sectionTitle}>Latest writing</h2>
+          <Link href="/articles" className={styles.seeAll}>
+            all articles →
+          </Link>
+        </div>
+
+        <ul className={styles.list}>
+          {latest.map((article) => (
+            <li key={article.slug}>
+              <Link href={`/articles/${article.slug}`} className={styles.row}>
+                <span className={styles.rowTitle}>{article.title}</span>
+                <span className={styles.rowTags}>
+                  {new Date(article.date).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric',
+                  })}
+                </span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section className={styles.section}>
+        <p className={styles.cta}>
+          <Link href="/experience" className={styles.ctaLink}>
+            See where I&apos;ve worked
+          </Link>{' '}
+          or{' '}
+          <Link href="/contact" className={styles.ctaLink}>
+            get in touch
+          </Link>
+          .
+        </p>
+      </section>
+    </Container>
   );
-}
+};
+
+export default HomePage;
