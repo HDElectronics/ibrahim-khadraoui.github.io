@@ -10,6 +10,13 @@ const GUTTER_PAD = 32;   // keep traces clear of the column edge
 const GLOW_RADIUS = 170;
 const IDLE_EPSILON = 0.002;
 
+// Real-PCB routing vocabulary: parallel bus bundles on a fixed grid,
+// shared 45° jogs with staggered corners, vias at the breakouts.
+const PITCH = 8;         // spacing between traces within a bus
+const BUS_GAP = 24;      // gap between adjacent bus bundles
+const EDGE = 12;         // clearance from viewport edges
+const MIN_JOG_GAP = 90;  // vertical distance between two jogs of one bus
+
 interface Segment {
   x1: number;
   y1: number;
@@ -19,33 +26,77 @@ interface Segment {
   glow: number;
 }
 
+const snap = (v: number) => Math.round(v / PITCH) * PITCH;
+
 function buildTraces(width: number, height: number): Segment[] {
   const segments: Segment[] = [];
-  const gutter = (width - COLUMN) / 2 - GUTTER_PAD;
-  if (gutter < 80) return segments;
+  const gutterWidth = (width - COLUMN) / 2 - GUTTER_PAD;
+  if (gutterWidth < 80) return segments;
 
-  const lanes = Math.max(3, Math.round(height / 150));
+  const pushVia = (x: number, y: number) => {
+    segments.push({ x1: x, y1: y, x2: x, y2: y, via: true, glow: 0 });
+  };
 
   for (const side of ['left', 'right'] as const) {
-    for (let lane = 0; lane < lanes; lane++) {
-      let y = ((lane + 0.5) * height) / lanes + (Math.random() - 0.5) * 40;
-      let x = side === 'left' ? gutter : width - gutter;
-      const dir = side === 'left' ? -1 : 1;
-      const steps = 3 + Math.floor(Math.random() * 3);
+    // Gutter coordinates: 0 at the outer viewport edge, growing inward.
+    const toScreen = (x: number) => (side === 'left' ? x : width - x);
 
-      for (let s = 0; s < steps; s++) {
-        const run = 40 + Math.random() * 90;
-        const diagonal = Math.random() < 0.45;
-        const nx = x + dir * run;
-        const ny = diagonal ? y + (Math.random() < 0.5 ? -run : run) * 0.6 : y;
+    let cursor = snap(EDGE + PITCH);
+    while (cursor + PITCH * 2 < gutterWidth) {
+      const laneCount = 2 + Math.floor(Math.random() * 4); // 2–5 traces per bus
+      const busWidth = (laneCount - 1) * PITCH;
+      if (cursor + busWidth >= gutterWidth) break;
 
-        if (side === 'left' ? nx < 8 : nx > width - 8) break;
-        if (ny < 8 || ny > height - 8) break;
+      // One shared route per bundle: vertical runs joined by 45° jogs at
+      // well-separated heights, like a routed bus changing channels.
+      const jogYs = Array.from({ length: 1 + Math.floor(Math.random() * 3) }, () =>
+        snap(EDGE * 4 + Math.random() * (height - EDGE * 10))
+      )
+        .sort((a, b) => a - b)
+        .filter((y, i, arr) => i === 0 || y - arr[i - 1] >= MIN_JOG_GAP);
 
-        segments.push({ x1: x, y1: y, x2: nx, y2: ny, via: s > 0, glow: 0 });
-        x = nx;
-        y = ny;
+      const route: { y: number; dx: number }[] = [];
+      let busX = cursor;
+      for (const jogY of jogYs) {
+        const roomIn = gutterWidth - busWidth - busX - PITCH;
+        const roomOut = busX - EDGE;
+        const inward = Math.random() < 0.5;
+        const room = inward ? roomIn : roomOut;
+        const dx = Math.min(snap(24 + Math.random() * 56), snap(room));
+        if (dx < PITCH * 2) continue;
+        route.push({ y: jogY, dx: inward ? dx : -dx });
+        busX += inward ? dx : -dx;
       }
+
+      for (let lane = 0; lane < laneCount; lane++) {
+        let gx = cursor + lane * PITCH;
+        let y = EDGE;
+        let x = toScreen(gx);
+        pushVia(x, y);
+
+        for (const { y: jogY, dx } of route) {
+          // Stagger the bend per lane so the bundle keeps its spacing
+          // through the corner — the classic parallel-trace look.
+          const bendY = jogY + lane * PITCH;
+          if (bendY > height - EDGE * 4) break;
+
+          segments.push({ x1: x, y1: y, x2: x, y2: bendY, via: false, glow: 0 });
+          const nx = toScreen(gx + dx);
+          const ny = bendY + Math.abs(dx); // 45°: dy equals |dx|
+          segments.push({ x1: x, y1: bendY, x2: nx, y2: ny, via: false, glow: 0 });
+          gx += dx;
+          x = nx;
+          y = ny;
+        }
+
+        const endY = height - EDGE;
+        if (y < endY) {
+          segments.push({ x1: x, y1: y, x2: x, y2: endY, via: false, glow: 0 });
+        }
+        pushVia(x, endY);
+      }
+
+      cursor = snap(cursor + busWidth + BUS_GAP + Math.random() * PITCH * 2);
     }
   }
 
@@ -97,7 +148,7 @@ const CircuitBackground = () => {
 
         const lit = seg.glow > 0.02;
         ctx.strokeStyle = lit ? colours.accent : colours.base;
-        ctx.globalAlpha = 0.28 + seg.glow * 0.6;
+        ctx.globalAlpha = 0.34 + seg.glow * 0.6;
         ctx.lineWidth = 1;
         ctx.beginPath();
         ctx.moveTo(seg.x1, seg.y1);
