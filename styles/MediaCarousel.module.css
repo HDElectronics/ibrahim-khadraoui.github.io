@@ -9,6 +9,7 @@
 }
 
 .viewer {
+  position: relative;
   display: block;
   width: 100%;
   padding: 0;

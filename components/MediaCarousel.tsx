@@ -7,6 +7,13 @@ import { MediaItem } from '@/types';
 
 import styles from '@/styles/MediaCarousel.module.css';
 
+function videoMimeType(src: string): string {
+  const ext = src.split('.').pop()?.toLowerCase();
+  if (ext === 'webm') return 'video/webm';
+  if (ext === 'ogg' || ext === 'ogv') return 'video/ogg';
+  return 'video/mp4';
+}
+
 interface MediaCarouselProps {
   items: MediaItem[];
   alt: string;
@@ -21,17 +28,17 @@ const MediaCarousel = ({ items, alt }: MediaCarouselProps) => {
   const safeIndex = Math.min(index, items.length - 1);
   const current = items[safeIndex];
 
-  const renderMedia = (item: MediaItem, className: string) =>
+  const renderMedia = (item: MediaItem, className: string, withControls = true) =>
     item.type === 'video' ? (
-      <video className={className} controls preload="metadata" playsInline>
-        <source src={item.src} type="video/mp4" />
+      <video className={className} controls={withControls} preload="metadata" playsInline>
+        <source src={item.src} type={videoMimeType(item.src)} />
       </video>
     ) : (
       /* eslint-disable-next-line @next/next/no-img-element */
       <img className={className} src={item.src} alt={alt} />
     );
 
-  // A lone item needs no carousel chrome.
+  // A lone item needs no carousel chrome — a bare video keeps its own controls.
   if (items.length === 1) {
     return <div className={styles.single}>{renderMedia(current, styles.media)}</div>;
   }
@@ -60,7 +67,12 @@ const MediaCarousel = ({ items, alt }: MediaCarouselProps) => {
         onClick={() => setOpen(true)}
         aria-label={`Expand ${alt} media ${safeIndex + 1} of ${items.length}`}
       >
-        {renderMedia(current, styles.media)}
+        {renderMedia(current, styles.media, current.type !== 'video')}
+        {current.type === 'video' && (
+          <span className={styles.playBadge} aria-hidden="true">
+            ▶
+          </span>
+        )}
       </button>
 
       <div className={styles.bar}>
@@ -71,7 +83,7 @@ const MediaCarousel = ({ items, alt }: MediaCarouselProps) => {
 
       <ul className={styles.thumbs}>
         {items.map((item, i) => (
-          <li key={item.src}>
+          <li key={`${item.src}-${i}`}>
             <button
               type="button"
               className={i === safeIndex ? `${styles.thumb} ${styles.active}` : styles.thumb}
@@ -82,7 +94,7 @@ const MediaCarousel = ({ items, alt }: MediaCarouselProps) => {
               {item.type === 'video' ? (
                 <>
                   <video className={styles.thumbMedia} preload="metadata" muted playsInline>
-                    <source src={item.src} type="video/mp4" />
+                    <source src={item.src} type={videoMimeType(item.src)} />
                   </video>
                   <span className={styles.playBadge} aria-hidden="true">
                     ▶

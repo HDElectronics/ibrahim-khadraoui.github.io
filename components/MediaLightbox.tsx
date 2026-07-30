@@ -7,6 +7,16 @@ import { MediaItem } from '@/types';
 
 import styles from '@/styles/MediaLightbox.module.css';
 
+const FOCUSABLE_SELECTOR =
+  'button, [href], input, select, textarea, video, [tabindex]:not([tabindex="-1"])';
+
+function videoMimeType(src: string): string {
+  const ext = src.split('.').pop()?.toLowerCase();
+  if (ext === 'webm') return 'video/webm';
+  if (ext === 'ogg' || ext === 'ogv') return 'video/ogg';
+  return 'video/mp4';
+}
+
 interface MediaLightboxProps {
   items: MediaItem[];
   alt: string;
@@ -42,11 +52,20 @@ const MediaLightbox = ({
     };
   }, []);
 
-  // Move focus in on open, and keep Tab inside the dialog.
+  // Move focus in on open, and restore it on close. Runs exactly once per
+  // mount so navigating between items never throws focus back to the trigger.
   useEffect(() => {
     const trigger = document.activeElement as HTMLElement | null;
     closeRef.current?.focus();
 
+    return () => {
+      trigger?.focus();
+    };
+  }, []);
+
+  // Escape/Arrow handling and the Tab focus trap. Re-runs when `step`
+  // changes identity, but only ever touches the keydown listener.
+  useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         event.preventDefault();
@@ -65,7 +84,7 @@ const MediaLightbox = ({
       }
       if (event.key !== 'Tab') return;
 
-      const focusables = dialogRef.current?.querySelectorAll<HTMLElement>('button');
+      const focusables = dialogRef.current?.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR);
       if (!focusables || focusables.length === 0) return;
       const first = focusables[0];
       const last = focusables[focusables.length - 1];
@@ -82,7 +101,6 @@ const MediaLightbox = ({
     document.addEventListener('keydown', onKeyDown);
     return () => {
       document.removeEventListener('keydown', onKeyDown);
-      trigger?.focus();
     };
   }, [onClose, step]);
 
@@ -124,7 +142,7 @@ const MediaLightbox = ({
       <div className={styles.stage} onClick={(event) => event.stopPropagation()}>
         {item.type === 'video' ? (
           <video className={styles.media} controls autoPlay playsInline>
-            <source src={item.src} type="video/mp4" />
+            <source src={item.src} type={videoMimeType(item.src)} />
           </video>
         ) : (
           /* eslint-disable-next-line @next/next/no-img-element */

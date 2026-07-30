@@ -3,6 +3,13 @@ import { ContentBlock, MediaItem } from '@/types';
 
 import styles from '@/styles/ContentBlocks.module.css';
 
+function videoMimeType(src: string): string {
+  const ext = src.split('.').pop()?.toLowerCase();
+  if (ext === 'webm') return 'video/webm';
+  if (ext === 'ogg' || ext === 'ogv') return 'video/ogg';
+  return 'video/mp4';
+}
+
 interface ContentBlocksProps {
   blocks: ContentBlock[];
   alt: string;
@@ -64,7 +71,7 @@ const ContentBlocks = ({ blocks, alt }: ContentBlocksProps) => (
           const only = group.items[0];
           return only.type === 'video' ? (
             <video key={index} className={styles.media} controls preload="metadata" playsInline>
-              <source src={only.src} type="video/mp4" />
+              <source src={only.src} type={videoMimeType(only.src)} />
             </video>
           ) : (
             /* eslint-disable-next-line @next/next/no-img-element */

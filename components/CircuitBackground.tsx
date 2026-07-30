@@ -8,6 +8,7 @@ const COLUMN = 720;      // content column width, matches --maxw
 const MIN_VIEWPORT = 1100;
 const GUTTER_PAD = 32;   // keep traces clear of the column edge
 const GLOW_RADIUS = 170;
+const IDLE_EPSILON = 0.002;
 
 interface Segment {
   x1: number;
@@ -56,16 +57,19 @@ const CircuitBackground = () => {
 
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    if (window.innerWidth < MIN_VIEWPORT) return;
 
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
+    const viewportQuery = window.matchMedia(`(min-width: ${MIN_VIEWPORT}px)`);
+
     let segments: Segment[] = [];
     let frame = 0;
+    let resizeFrame = 0;
     let running = false;
+    let active = false;
     const pointer = { x: -9999, y: -9999 };
     const colours = { base: '#23272e', accent: '#4cc9f0' };
 
@@ -75,14 +79,20 @@ const CircuitBackground = () => {
       colours.accent = style.getPropertyValue('--accent').trim() || colours.accent;
     };
 
+    // Paints the current frame and reports how far the glow values still
+    // are from their targets, so the caller can tell whether anything
+    // actually changed.
     const draw = () => {
       ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+      let maxDelta = 0;
 
       for (const seg of segments) {
         const mx = (seg.x1 + seg.x2) / 2;
         const my = (seg.y1 + seg.y2) / 2;
         const dist = Math.hypot(mx - pointer.x, my - pointer.y);
         const target = dist < GLOW_RADIUS ? 1 - dist / GLOW_RADIUS : 0;
+        maxDelta = Math.max(maxDelta, Math.abs(target - seg.glow));
         seg.glow += (target - seg.glow) * 0.12;
 
         const lit = seg.glow > 0.02;
@@ -103,9 +113,10 @@ const CircuitBackground = () => {
       }
 
       ctx.globalAlpha = 1;
+      return maxDelta;
     };
 
-    const resize = () => {
+    const rebuild = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       canvas.width = window.innerWidth * dpr;
       canvas.height = window.innerHeight * dpr;
@@ -116,11 +127,9 @@ const CircuitBackground = () => {
       draw();
     };
 
-    const settled = () => segments.every((seg) => seg.glow < 0.02);
-
     const tick = () => {
-      draw();
-      if (settled() && pointer.x < -9000) {
+      const maxDelta = draw();
+      if (maxDelta < IDLE_EPSILON) {
         running = false;
         return;
       }
@@ -131,6 +140,16 @@ const CircuitBackground = () => {
       if (running || document.hidden) return;
       running = true;
       frame = requestAnimationFrame(tick);
+    };
+
+    const onResize = () => {
+      // Coalesce a burst of resize events (e.g. dragging a window edge)
+      // into a single rebuild on the next frame.
+      if (resizeFrame) cancelAnimationFrame(resizeFrame);
+      resizeFrame = requestAnimationFrame(() => {
+        resizeFrame = 0;
+        rebuild();
+      });
     };
 
     const onPointerMove = (event: PointerEvent) => {
@@ -158,26 +177,51 @@ const CircuitBackground = () => {
       readColours();
       draw();
     });
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['data-theme'],
-    });
 
-    readColours();
-    resize();
+    const setup = () => {
+      if (active) return;
+      active = true;
+      readColours();
+      rebuild();
+      observer.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['data-theme'],
+      });
+      window.addEventListener('resize', onResize);
+      window.addEventListener('pointermove', onPointerMove);
+      document.addEventListener('pointerleave', onPointerLeave);
+      document.addEventListener('visibilitychange', onVisibility);
+    };
 
-    window.addEventListener('resize', resize);
-    window.addEventListener('pointermove', onPointerMove);
-    document.addEventListener('pointerleave', onPointerLeave);
-    document.addEventListener('visibilitychange', onVisibility);
-
-    return () => {
+    const teardown = () => {
+      if (!active) return;
+      active = false;
       cancelAnimationFrame(frame);
+      if (resizeFrame) cancelAnimationFrame(resizeFrame);
+      resizeFrame = 0;
+      running = false;
       observer.disconnect();
-      window.removeEventListener('resize', resize);
+      window.removeEventListener('resize', onResize);
       window.removeEventListener('pointermove', onPointerMove);
       document.removeEventListener('pointerleave', onPointerLeave);
       document.removeEventListener('visibilitychange', onVisibility);
+      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+    };
+
+    const onViewportChange = () => {
+      if (viewportQuery.matches) {
+        setup();
+      } else {
+        teardown();
+      }
+    };
+
+    onViewportChange();
+    viewportQuery.addEventListener('change', onViewportChange);
+
+    return () => {
+      viewportQuery.removeEventListener('change', onViewportChange);
+      teardown();
     };
   }, []);
 

@@ -10,6 +10,7 @@
 
 html {
   color-scheme: dark;
+  scrollbar-gutter: stable;
 }
 
 [data-theme='light'] {
@@ -46,11 +47,6 @@ p a {
 p a:hover {
   color: var(--accent);
   text-decoration-color: var(--accent);
-}
-
-main {
-  position: relative;
-  z-index: 1;
 }
 
 img,
