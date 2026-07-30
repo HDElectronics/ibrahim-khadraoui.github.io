@@ -1,0 +1,44 @@
+:root {
+  /* color — dark is the default theme */
+  --bg: #0b0d10;
+  --bg-subtle: #14171c;
+  --border: #23272e;
+  --text: #e6e8ea;
+  --text-muted: #9aa1a9;
+  --accent: #4cc9f0;
+
+  /* typography */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+  --fs-xl: 2rem;
+  --fs-lg: 1.25rem;
+  --fs-md: 1rem;
+  --fs-sm: 0.875rem;
+  --lh-body: 1.65;
+  --lh-heading: 1.2;
+
+  /* space — 4px base */
+  --s1: 4px;
+  --s2: 8px;
+  --s3: 16px;
+  --s4: 24px;
+  --s5: 48px;
+  --s6: 80px;
+
+  /* layout */
+  --radius: 6px;
+  --maxw: 720px;
+  --measure: 68ch;
+
+  /* motion */
+  --t-color: 150ms ease;
+}
+
+[data-theme='light'] {
+  --bg: #ffffff;
+  --bg-subtle: #f6f7f9;
+  --border: #e4e7eb;
+  --text: #15181c;
+  --text-muted: #5c646d;
+  --accent: #0284c7;
+}
