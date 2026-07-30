@@ -1,0 +1,29 @@
+.card {
+  display: grid;
+  gap: var(--s2);
+  padding: var(--s3);
+  margin-inline: calc(var(--s3) * -1);
+  border-radius: var(--radius);
+  transition: background var(--t-color);
+}
+
+.card:hover {
+  background: var(--bg-subtle);
+}
+
+.date {
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+}
+
+.title {
+  font-size: var(--fs-md);
+  max-width: var(--measure);
+}
+
+.excerpt {
+  max-width: var(--measure);
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+}
