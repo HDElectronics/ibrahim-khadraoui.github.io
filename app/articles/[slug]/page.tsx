@@ -35,6 +35,10 @@ const ArticleDetailPage = async ({ params }: ArticleDetailPageProps) => {
     notFound();
   }
 
+  const coverInContent = article.content.some(
+    (block) => block.type === 'img' && block.src === article.cover,
+  );
+
   return (
     <Container className={styles.page}>
       <Link href="/articles" className={styles.back}>
@@ -51,6 +55,11 @@ const ArticleDetailPage = async ({ params }: ArticleDetailPageProps) => {
           })}
         </p>
       </header>
+
+      {!coverInContent && article.cover && (
+        /* eslint-disable-next-line @next/next/no-img-element */
+        <img src={article.cover} alt={article.title} className={styles.cover} />
+      )}
 
       <ContentBlocks blocks={article.content} alt={article.title} />
     </Container>
