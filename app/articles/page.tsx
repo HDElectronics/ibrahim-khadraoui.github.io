@@ -23,9 +23,11 @@ const ArticlesPage = () => (
     </header>
 
     <div className={styles.list}>
-      {articles.map((article) => (
-        <WPArticleCard key={article.slug} article={article} />
-      ))}
+      {[...articles]
+        .sort((a, b) => b.date.localeCompare(a.date))
+        .map((article) => (
+          <WPArticleCard key={article.slug} article={article} />
+        ))}
     </div>
   </Container>
 );

@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import Link from 'next/link';
 
 import Container from '@/components/Container';
@@ -7,9 +8,16 @@ import { articles } from '@/data/articles';
 
 import styles from '@/styles/HomePage.module.css';
 
+export const metadata: Metadata = {
+  description:
+    'Ibrahim Khadraoui is an AI / ML systems engineer working on edge inference and embodied AI — taking research models to production on robots and edge devices.',
+};
+
 const HomePage = () => {
   const selected = projects.slice(0, 3);
-  const latest = articles.slice(0, 2);
+  const latest = [...articles]
+    .sort((a, b) => b.date.localeCompare(a.date))
+    .slice(0, 2);
 
   return (
     <Container className={styles.page}>

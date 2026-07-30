@@ -77,6 +77,25 @@ const AboutPage = () => (
               {award.organization} · {award.date}
             </span>
             <p className={styles.awardText}>{award.description}</p>
+            {(award.images?.length || award.videos?.length) ? (
+              <div className={styles.awardMedia}>
+                {award.images?.map((src) => (
+                  /* eslint-disable-next-line @next/next/no-img-element */
+                  <img key={src} src={src} alt={award.title} className={styles.media} />
+                ))}
+                {award.videos?.map((src) => (
+                  <video
+                    key={src}
+                    className={styles.media}
+                    controls
+                    preload="metadata"
+                    playsInline
+                  >
+                    <source src={src} type="video/mp4" />
+                  </video>
+                ))}
+              </div>
+            ) : null}
           </li>
         ))}
       </ul>

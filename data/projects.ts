@@ -6,7 +6,6 @@ export const projects: Project[] = [
     description:
       'A VR-based fleet management system at TII for teleoperating drones and ground robots over 4G/5G. Operators see a live 360° feed in a VR headset and drive the vehicle through a VR treadmill, joysticks, or a custom smart glove, with haptic feedback closing the loop.',
     hook: 'Fly a drone in Abu Dhabi from a VR headset in Dubai — see through its eyes, steer with your body, feel it fly back.',
-    logo: '/logos/chip.svg',
     link: '/projects/uav-xr',
     slug: 'uav-xr',
     category: 'professional',
@@ -59,7 +58,6 @@ export const projects: Project[] = [
     description:
       'A fully on-device multimodal AI pipeline on NVIDIA Jetson Orin, chaining Whisper (ASR), a Vision-Language Model, and Piper (TTS) into a real-time voice-in / voice-out assistant that can reason about what a camera sees — no cloud required.',
     hook: 'A robot brain that can see, listen, and talk back — running entirely offline in the palm of your hand.',
-    logo: '/logos/chip.svg',
     link: '/projects/falcon',
     slug: 'falcon',
     category: 'professional',
@@ -83,9 +81,8 @@ export const projects: Project[] = [
   {
     title: 'Falcon3 Multimodal Agent — iOS',
     description:
-      'A fully on-device voice conversational agent on iPhone. I integrated our Falcon3 vision-language model on Apple’s MLX framework so it runs natively on Apple Silicon, wrapped with ASR and TTS for a complete speech-to-speech loop — offline, no API keys.',
-    hook: 'A full AI assistant living inside an iPhone with no internet connection — ask it what it sees, hear it answer back.',
-    logo: '/logos/chip.svg',
+      'A fully on-device voice conversational agent on iPhone, built by the team at TII. My contribution: integrating the Falcon3 vision-language model on Apple’s MLX framework so it runs natively on Apple Silicon — the on-device inference core behind the app’s speech-to-speech loop, offline and with no API keys.',
+    hook: 'My part: getting Falcon3 to run natively on iPhone via MLX — the offline inference core of a full speech-to-speech assistant.',
     link: '/projects/falcon3-ios',
     slug: 'falcon3-ios',
     category: 'professional',
@@ -95,11 +92,15 @@ export const projects: Project[] = [
     content: [
       {
         type: 'p',
-        text: 'A fully on-device voice conversational agent running on iPhone. The user speaks a question — optionally about what the camera sees — and gets a spoken answer back. Everything runs locally on Apple Silicon: no cloud, no API keys.',
+        text: 'A fully on-device voice conversational agent running on iPhone, built by the team at TII. The user speaks a question — optionally about what the camera sees — and gets a spoken answer back. Everything runs locally on Apple Silicon: no cloud, no API keys.',
+      },
+      {
+        type: 'p',
+        text: 'My contribution was the MLX integration: porting the Falcon3 vision-language model onto Apple’s MLX framework so it runs natively on Apple Silicon. That model is the inference core the rest of the app is built around.',
       },
       { type: 'h3', text: 'Pipeline' },
       { type: 'li', text: 'ASR — captures the user speech and transcribes it to text.' },
-      { type: 'li', text: 'Falcon3 VLM (MLX) — takes the transcribed question plus an optional camera image and generates a response, running entirely on-device via MLX.' },
+      { type: 'li', text: 'Falcon3 VLM (MLX) — the part I integrated: takes the transcribed question plus an optional camera image and generates a response, running entirely on-device via MLX.' },
       { type: 'li', text: 'TTS — synthesizes the response back into spoken audio.' },
       { type: 'h3', text: 'Why MLX' },
       {
@@ -113,7 +114,6 @@ export const projects: Project[] = [
     description:
       'A broadcast-automation system for A2RL autonomous racing at Yas Marina Circuit. I built the teams’ camera-management system: a from-scratch EMM client pulls each car’s live GPS, a CCTV coverage map plus a matching algorithm work out which camera frames each car, and every team is auto-routed its own car-locked stream.',
     hook: 'Every self-driving race car gets its own personal cameraman — automatically, live, at race speed.',
-    logo: '/logos/chip.svg',
     link: '/projects/a2rl-smart-camera',
     slug: 'a2rl-smart-camera',
     category: 'professional',
@@ -140,7 +140,6 @@ export const projects: Project[] = [
     description:
       'My Master’s thesis: an autonomous mobile robot that follows a person and carries their load, aimed at helping people with disabilities and the elderly. Person tracking uses Ultra-Wideband (DWM1000) radio and trilateration, fused with LIDAR and wheel encoders, on a ROS + Arduino Due stack.',
     hook: 'A robot that follows you like a loyal companion and carries your bags — built to give people their independence back.',
-    logo: '/logos/chip.svg',
     link: '/projects/icar',
     slug: 'icar',
     category: 'professional',
@@ -174,7 +173,6 @@ export const projects: Project[] = [
     description:
       'A hand-detection sanitizer dispenser built around an ATmega328P. An E18-D80NK IR sensor detects a hand and signals the MCU to actuate a relay that runs the pump for a short burst of gel.',
     hook: 'Wave your hand, get soap — zero touching, zero germs.',
-    logo: '/logos/chip.svg',
     link: '/projects/contactless-hand-sanitizer',
     slug: 'contactless-hand-sanitizer',
     category: 'hardware',
@@ -200,7 +198,6 @@ export const projects: Project[] = [
     description:
       'A high-speed autonomous line-following robot designed from scratch around an ATmega328P AU MCU.',
     hook: 'A tiny robot racing along a painted line faster than the eye can follow.',
-    logo: '/logos/chip.svg',
     link: '/projects/fast-line-follower',
     slug: 'fast-line-follower',
     category: 'hardware',
@@ -226,7 +223,6 @@ export const projects: Project[] = [
     description:
       'An electronic odometer for cars that reads raw data from a wheel-mounted sensor (the type typically used for ABS) to calculate distance travelled.',
     hook: 'Turns a spinning car wheel into an exact distance reading — no factory sensor required.',
-    logo: '/logos/chip.svg',
     link: '/projects/odometer',
     slug: 'odometer',
     category: 'hardware',
@@ -249,7 +245,6 @@ export const projects: Project[] = [
     description:
       'A custom PCB built for a racing simulator, acting as a USB HID controller based on an ATmega328P.',
     hook: 'Turns a home-built racing rig into a plug-and-play game controller your PC just recognizes.',
-    logo: '/logos/chip.svg',
     link: '/projects/usb-hid-gamepad',
     slug: 'usb-hid-gamepad',
     category: 'hardware',
@@ -270,7 +265,6 @@ export const projects: Project[] = [
     description:
       'A functional PCB business card built around a microcontroller and 3 RGB LEDs for programmable lighting effects.',
     hook: 'A business card that lights up — literally a tiny computer you hand someone at a networking event.',
-    logo: '/logos/chip.svg',
     link: '/projects/pcb-business-card',
     slug: 'pcb-business-card',
     category: 'hardware',
@@ -293,7 +287,6 @@ export const projects: Project[] = [
     description:
       'A collection of smaller PCBs designed for different tasks: a fast line follower V1, a LORA RA-01 carrier board, a DWM1000 UWB dev board, an enhanced Arduino UNO, an ATmega328P bootloader burner, and an 8x8 LED matrix.',
     hook: 'A grab bag of circuit boards built from scratch — because sometimes you just have to make the chip do the thing.',
-    logo: '/logos/chip.svg',
     link: '/projects/misc-pcb-designs',
     slug: 'misc-pcb-designs',
     category: 'hardware',
@@ -363,7 +356,6 @@ export const projects: Project[] = [
     description:
       'An end-to-end autonomous UAV system that makes a drone follow a person, in real time, from an edge NPU. A camera feeds a YOLOv5 detector running on a Rockchip RK3588 NPU. Detections are tracked with ByteTrack, streamed over MQTT, turned into velocity commands by a dual-axis PID controller, and sent to a PX4 flight controller over MAVSDK in offboard mode. The exact same software stack runs against a PX4 SITL simulator and the real drone — only the connection string changes.',
     hook: 'A drone that spots a person from the sky and follows them on its own — no pilot, no joystick, just an edge NPU and a PID loop.',
-    logo: '/logos/chip.svg',
     link: '/projects/atc',
     slug: 'atc',
     category: 'hobby',
@@ -441,7 +433,6 @@ export const projects: Project[] = [
     description:
       'A project I’m currently building at work: the data and evaluation backbone for a Vision-Language-Action (VLA) model. I own data collection with a mobile AI robot from Tossenrobotics, the tooling to convert and upload collected episodes to the training cluster for the training team, and the tooling to pull trained checkpoints back down for inference and evaluation.',
     hook: 'Building the pipeline that turns a robot’s real-world experience into the training data that teaches it new skills.',
-    logo: '/logos/chip.svg',
     link: '/projects/vla-data-pipeline',
     slug: 'vla-data-pipeline',
     category: 'professional',
@@ -471,7 +462,6 @@ export const projects: Project[] = [
     description:
       'Added support for the Falcon-H1 model family to llama.cpp — a hybrid Transformer + Mamba (State Space Model) architecture. Merged into master after 112 commits: conversion script tensor mapping, GGUF architecture registration, and inference graph construction for the hybrid attention/SSM layers.',
     hook: 'Taught the most widely used open-source LLM runtime how to run a brand-new hybrid Transformer+Mamba model architecture.',
-    logo: '/logos/chip.svg',
     link: '/projects/llama-cpp-falcon-h1',
     slug: 'llama-cpp-falcon-h1',
     category: 'open-source',

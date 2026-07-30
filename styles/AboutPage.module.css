@@ -74,6 +74,9 @@
 .hobbyTitle {
   max-width: var(--measure);
   font-weight: 600;
+}
+
+.publicationTitle {
   transition: color var(--t-color);
 }
 
@@ -93,4 +96,20 @@ a.publicationTitle:hover {
   max-width: var(--measure);
   font-size: var(--fs-sm);
   color: var(--text-muted);
+}
+
+.awardMedia {
+  display: grid;
+  gap: var(--s3);
+  max-width: var(--measure);
+  margin-top: var(--s1);
+}
+
+.media {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-subtle);
 }

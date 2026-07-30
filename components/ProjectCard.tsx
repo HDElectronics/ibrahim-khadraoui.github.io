@@ -27,7 +27,7 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
       )}
 
       <div className={styles.body}>
-        <h3 className={styles.title}>{project.title}</h3>
+        <h2 className={styles.title}>{project.title}</h2>
         <p className={styles.text}>{project.hook ?? project.description}</p>
         <p className={styles.tags}>{project.tags.slice(0, 4).join(' · ')}</p>
         {project.comingSoon && <span className={styles.badge}>Work in progress</span>}
