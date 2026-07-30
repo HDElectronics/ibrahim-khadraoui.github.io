@@ -1,4 +1,5 @@
-import { ContentBlock } from '@/types';
+import MediaCarousel from '@/components/MediaCarousel';
+import { ContentBlock, MediaItem } from '@/types';
 
 import styles from '@/styles/ContentBlocks.module.css';
 
@@ -9,6 +10,7 @@ interface ContentBlocksProps {
 
 type Group =
   | { kind: 'list'; items: string[] }
+  | { kind: 'media'; items: MediaItem[] }
   | { kind: 'block'; block: ContentBlock };
 
 function groupBlocks(blocks: ContentBlock[]): Group[] {
@@ -22,9 +24,21 @@ function groupBlocks(blocks: ContentBlock[]): Group[] {
       } else {
         groups.push({ kind: 'list', items: [block.text ?? ''] });
       }
-    } else {
-      groups.push({ kind: 'block', block });
+      continue;
     }
+
+    if (block.type === 'img' || block.type === 'video') {
+      if (!block.src) continue;
+      const last = groups[groups.length - 1];
+      if (last && last.kind === 'media') {
+        last.items.push({ type: block.type, src: block.src });
+      } else {
+        groups.push({ kind: 'media', items: [{ type: block.type, src: block.src }] });
+      }
+      continue;
+    }
+
+    groups.push({ kind: 'block', block });
   }
 
   return groups;
@@ -43,6 +57,21 @@ const ContentBlocks = ({ blocks, alt }: ContentBlocksProps) => (
             ))}
           </ul>
         );
+      }
+
+      if (group.kind === 'media') {
+        if (group.items.length === 1) {
+          const only = group.items[0];
+          return only.type === 'video' ? (
+            <video key={index} className={styles.media} controls preload="metadata" playsInline>
+              <source src={only.src} type="video/mp4" />
+            </video>
+          ) : (
+            /* eslint-disable-next-line @next/next/no-img-element */
+            <img key={index} src={only.src} alt={alt} className={styles.media} />
+          );
+        }
+        return <MediaCarousel key={index} items={group.items} alt={alt} />;
       }
 
       const { block } = group;
@@ -66,23 +95,6 @@ const ContentBlocks = ({ blocks, alt }: ContentBlocksProps) => (
               {block.text}
             </h4>
           );
-        case 'img':
-          return block.src ? (
-            /* eslint-disable-next-line @next/next/no-img-element */
-            <img key={index} src={block.src} alt={alt} className={styles.media} />
-          ) : null;
-        case 'video':
-          return block.src ? (
-            <video
-              key={index}
-              className={styles.media}
-              controls
-              preload="metadata"
-              playsInline
-            >
-              <source src={block.src} type="video/mp4" />
-            </video>
-          ) : null;
         case 'p':
         default:
           return (
