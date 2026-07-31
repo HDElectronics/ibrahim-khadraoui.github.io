@@ -1,6 +1,9 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
+  // Dev-only: allow opening the dev server via the machine's LAN IP
+  // (e.g. from a phone). Has no effect on production builds.
+  allowedDevOrigins: ['192.168.195.95'],
   images: {
     dangerouslyAllowSVG: true,
     contentDispositionType: 'attachment',
