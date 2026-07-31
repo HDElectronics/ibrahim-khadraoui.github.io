@@ -26,6 +26,8 @@
 
 .sectionTitle {
   font-size: var(--fs-lg);
+  /* Clears the sticky header when an anchor link jumps to a section. */
+  scroll-margin-top: 80px;
 }
 
 .paragraph {

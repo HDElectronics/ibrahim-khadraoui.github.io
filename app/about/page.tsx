@@ -83,7 +83,9 @@ const AboutPage = () => (
     </section>
 
     <section className={styles.section}>
-      <h2 className={styles.sectionTitle}>Recognition</h2>
+      <h2 id="recognition" className={styles.sectionTitle}>
+        Recognition
+      </h2>
       <ul className={styles.awards}>
         {awards.map((award) => (
           <li key={award.title} className={styles.award}>

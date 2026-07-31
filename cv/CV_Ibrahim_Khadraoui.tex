@@ -5,23 +5,6 @@
 % License : MIT
 % Content : Ibrahim Khadraoui
 %------------------------
-%
-% LINK PLACEHOLDERS -- replace every TODO_LINK_* below with a real URL.
-% Grep them with:  grep -n "TODO_LINK_" CV_Ibrahim_Khadraoui.tex
-%   TODO_LINK_MLX_PORT         MLX port repo or PR
-%   TODO_LINK_VOICE2ACTION     voice-to-action platform (repo / demo / portfolio)
-%   TODO_LINK_UAV_VR           70 km VR-controlled UAV writeup
-%   TODO_LINK_SMART_GLOVE      smart glove writeup
-%   TODO_LINK_A2RL             A2RL autonomous racing work
-%   TODO_LINK_GAUSSIAN_VR      A-Frame Gaussian splatting viewer
-%   TODO_LINK_NAS_DAILY        NAS Daily feature video
-%   TODO_LINK_GITEX            GITEX Dubai 2022 demo coverage
-%   TODO_LINK_ATC              ATC project page
-%   TODO_LINK_SHEEP_BENCH      Sheep Counting Benchmark project page
-%   TODO_LINK_FREELANCE        (optional) freelance hardware portfolio section
-%   TODO_LINK_NOVA_VIDEO       Nova Award ceremony / announcement video
-%   TODO_LINK_GOOGLE_SCHOLAR   Google Scholar profile
-%------------------------
 
 \documentclass[letterpaper,10pt]{article}
 
@@ -199,21 +182,21 @@
         \resumeItem{\textbf{Work on the inference and deployment} path for FalconVLA, TII's 8B vision-language-action model family, from PyTorch research checkpoint to running policy on physical bimanual robot hardware}
         \resumeItem{\textbf{Optimized a model's TensorRT path to run 1.72$\times$ faster than PyTorch} (101.4 ms vs 174 ms per query) at identical action accuracy}
         \resumeItem{\textbf{Authored the upstream Falcon-H1 implementation in llama.cpp} --- \link{https://github.com/ggml-org/llama.cpp/pull/14534}{merged PR ggml-org/llama.cpp\#14534}, adding initial support for the Falcon-H1 hybrid-head model family to the project used worldwide for local LLM inference; also implemented Falcon3VLM support --- vision tower, projector, tokenizer and HF$\rightarrow$GGUF converters \stack{C++ $\cdot$ ggml $\cdot$ llama.cpp}}
-        \resumeItem{\textbf{Ported the same models to \link{TODO_LINK_MLX_PORT}{MLX}} for native inference on Apple silicon \stack{Python $\cdot$ MLX}}
+        \resumeItem{\textbf{Ported the same models to \link{https://ibrahim-khadraoui-portfolio-seven.vercel.app/projects/falcon3-ios}{MLX}} for native inference on Apple silicon \stack{Python $\cdot$ MLX}}
         \resumeItem{\textbf{Contributed to the Falcon-H1 model series} --- co-author of the \link{https://arxiv.org/abs/2507.22448}{technical report} (arXiv:2507.22448)}
         \resumeItem{\textbf{Fine-tuned large language models with LoRA} and detection models for downstream deployment}
-        \resumeItem{\textbf{Built a \link{TODO_LINK_VOICE2ACTION}{voice-to-action platform}} for conversational robot control --- LangGraph agent with confirm-before-execute and VLM scene grounding, self-hosted ASR/TTS, always-on three-camera WebRTC streaming, 3D URDF visualisation}
+        \resumeItem{\textbf{Built a voice-to-action platform} for conversational robot control --- LangGraph agent with confirm-before-execute and VLM scene grounding, self-hosted ASR/TTS, always-on three-camera WebRTC streaming, 3D URDF visualisation}
         \resumeItem{\textbf{Mentored new joiners and interns}, teaching engineering practice and sharing knowledge across the team --- several stay in contact long after moving on}
         \resumeItem{\textbf{Reviewed code delivered by external collaborations} building a video surveillance pipeline combining a vision-language model with an object detection model --- acting as technical reviewer on their pull requests}
       \resumeItemListEnd
 
       \resumeSubSubheading{Focus: UAV, Immersive \& Streaming Systems}{2022 -- 2024}
       \resumeItemListStart
-        \resumeItem{\textbf{Engineered a \link{TODO_LINK_UAV_VR}{VR-controlled UAV system} operated remotely over 70 km on a 5G network}, with live 360$^{\circ}$ video, built end to end: airframe and electronics, cloud-server control pipeline, and haptic feedback conveying real-time telemetry and the sensation of drone movement; \textbf{demonstrated publicly at \link{TODO_LINK_GITEX}{GITEX Dubai 2022}} and featured by \link{TODO_LINK_NAS_DAILY}{NAS Daily}}
-        \resumeItem{\textbf{Designed and built a \link{TODO_LINK_SMART_GLOVE}{smart glove} from scratch} --- board layout, soldering and firmware --- used as the drone's control interface and adapted to further use cases}
-        \resumeItem{\textbf{Collaborated with the Live in Five team on the \link{TODO_LINK_A2RL}{A2RL autonomous racing competition}}: decoded the full EMM protocol and developed the camera-view switching algorithm used for the viewer experience}
-        \resumeItem{Built a \link{TODO_LINK_GAUSSIAN_VR}{VR application in A-Frame} for visualising Gaussian splatting models produced at TII}
-        \resumeItem{\textbf{Awarded the \link{TODO_LINK_NOVA_VIDEO}{Nova Award}} for the quarter, in a research environment of senior scientists}
+        \resumeItem{\textbf{Engineered a \link{https://ibrahim-khadraoui-portfolio-seven.vercel.app/projects/uav-xr}{VR-controlled UAV system} operated remotely over 70 km on a 5G network}, with live 360$^{\circ}$ video, built end to end: airframe and electronics, cloud-server control pipeline, and haptic feedback conveying real-time telemetry and the sensation of drone movement; \textbf{demonstrated publicly at \link{https://ibrahim-khadraoui-portfolio-seven.vercel.app/projects/uav-xr\#gitex-global-demo}{GITEX Dubai 2022}} and featured by \link{https://ibrahim-khadraoui-portfolio-seven.vercel.app/projects/uav-xr\#gitex-global-demo}{NAS Daily}}
+        \resumeItem{\textbf{Designed and built a \link{https://ibrahim-khadraoui-portfolio-seven.vercel.app/projects/uav-xr\#smart-glove-custom-hardware}{smart glove} from scratch} --- board layout, soldering and firmware --- used as the drone's control interface and adapted to further use cases}
+        \resumeItem{\textbf{Collaborated with the Live in Five team on the \link{https://ibrahim-khadraoui-portfolio-seven.vercel.app/projects/a2rl-smart-camera}{A2RL autonomous racing competition}}: decoded the full EMM protocol and developed the camera-view switching algorithm used for the viewer experience}
+        \resumeItem{Built a VR application in A-Frame for visualising Gaussian splatting models produced at TII}
+        \resumeItem{\textbf{Awarded the \link{https://ibrahim-khadraoui-portfolio-seven.vercel.app/about\#recognition}{Nova Award}} for the quarter, in a research environment of senior scientists}
       \resumeItemListEnd
 
     \vspace{6pt}
@@ -222,7 +205,7 @@
       {Independent contractor}{}
       \resumeItemListStart
         \resumeItem{Started while still a student, working directly with companies to build smart IoT solutions end to end --- schematic capture and PCB layout, through firmware, up to the platform running on top}
-        \resumeItem{Delivered complete \link{TODO_LINK_FREELANCE}{hardware and firmware prototypes} for universities, researchers and startups, covering the full path from concept to a reliable working device}
+        \resumeItem{Delivered complete \link{https://ibrahim-khadraoui-portfolio-seven.vercel.app/projects}{hardware and firmware prototypes} for universities, researchers and startups, covering the full path from concept to a reliable working device}
       \resumeItemListEnd
 
   \resumeSubHeadingListEnd
@@ -233,13 +216,13 @@
     \resumeSubHeadingListStart
 
       \resumeProjectHeading
-          {\textbf{\link{TODO_LINK_ATC}{ATC}} --- real-time drone detection and tracking}{}
+          {\textbf{\link{https://ibrahim-khadraoui-portfolio-seven.vercel.app/projects/atc}{ATC}} --- real-time drone detection and tracking}{}
           \resumeItemListStart
             \resumeItem{Modular backend architecture (RKNN / ONNX) running a fine-tuned YOLOv5 + ByteTrack on an Orange Pi 5 Pro NPU with INT8, C++ detector service over libav, RTSP$\rightarrow$WebRTC delivery \stack{C++ $\cdot$ RKNN $\cdot$ MediaMTX $\cdot$ WebRTC $\cdot$ MQTT $\cdot$ PX4 $\cdot$ Gazebo $\cdot$ IsaacSim}}
           \resumeItemListEnd
 
       \resumeProjectHeading
-          {\textbf{\link{TODO_LINK_SHEEP_BENCH}{Sheep Counting Benchmark}} --- multi-paradigm counting evaluation platform}{}
+          {\textbf{Sheep Counting Benchmark} --- multi-paradigm counting evaluation platform}{}
           \resumeItemListStart
             \resumeItem{Containerised benchmark putting \textbf{20+ model variants} behind one contract --- detection, density estimation, counting specialists and VLM pointing --- and ranking them on MAE / RMSE / MAPE and latency, with detection overlays in an interactive UI. Adding a model needs no change to the orchestrator or frontend \stack{Python $\cdot$ FastAPI $\cdot$ Docker}}
           \resumeItemListEnd
@@ -257,7 +240,7 @@
     \item \textbf{\link{https://athena.itec.aau.at/gmsys24/}{Energy Cost of Coding Omnidirectional Videos using ARM and x86 Platforms}} --- GMSys '24, 2nd ACM Green Multimedia Systems Workshop @ MMSys, April 2024
     \item \textbf{\link{https://doi.org/10.1109/TCSII.2023.3257363}{Locomotion-based UAV Control Toward the Internet of Senses}} --- IEEE Transactions on Circuits and Systems II: Express Briefs, vol. 70, no. 5, pp. 1804--1808, May 2023
     \item \textbf{Virtual Reality and Multimedia Towards the Internet of Senses} --- Wireless World Research Forum, 2022
-    \item Full list: \link{TODO_LINK_GOOGLE_SCHOLAR}{Google Scholar profile}
+    \item Full list: \link{https://scholar.google.com/citations?user=w8AZryMAAAAJ}{Google Scholar profile}
   \end{itemize}
 \vspace{-6pt}
 
@@ -284,9 +267,9 @@
   \begin{itemize}[leftmargin=0.15in, label={$\bullet$}, itemsep=1pt, parsep=0pt, topsep=2pt]
     \small
     \item \textbf{\link{https://github.com/ggml-org/llama.cpp/blob/master/AUTHORS}{Upstream contributor to llama.cpp}} --- authored the merged Falcon-H1 model family implementation (\link{https://github.com/ggml-org/llama.cpp/pull/14534}{PR \#14534})
-    \item \textbf{\link{TODO_LINK_NOVA_VIDEO}{Nova Award}} --- quarterly research excellence award, TII
-    \item \textbf{\link{TODO_LINK_GITEX}{GITEX Dubai 2022}} --- public demonstration of 70 km VR-controlled UAV with 360$^{\circ}$ video streaming over 5G
-    \item \textbf{Featured by \link{TODO_LINK_NAS_DAILY}{NAS Daily}} --- 5G remote drone control system
+    \item \textbf{\link{https://ibrahim-khadraoui-portfolio-seven.vercel.app/about\#recognition}{Nova Award}} --- quarterly research excellence award, TII
+    \item \textbf{\link{https://ibrahim-khadraoui-portfolio-seven.vercel.app/projects/uav-xr\#gitex-global-demo}{GITEX Dubai 2022}} --- public demonstration of 70 km VR-controlled UAV with 360$^{\circ}$ video streaming over 5G
+    \item \textbf{Featured by \link{https://ibrahim-khadraoui-portfolio-seven.vercel.app/projects/uav-xr\#gitex-global-demo}{NAS Daily}} --- 5G remote drone control system
   \end{itemize}
 \vspace{-6pt}
 

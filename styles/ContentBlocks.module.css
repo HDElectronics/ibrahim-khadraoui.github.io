@@ -4,6 +4,13 @@
   max-width: var(--measure);
 }
 
+/* Clears the sticky header when an anchor link jumps to a section. */
+.h2,
+.h3,
+.h4 {
+  scroll-margin-top: 80px;
+}
+
 .h2 {
   margin-top: var(--s4);
   font-size: var(--fs-lg);

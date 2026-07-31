@@ -14,6 +14,14 @@ type Group =
   | { kind: 'media'; items: MediaItem[] }
   | { kind: 'block'; block: ContentBlock };
 
+// Heading anchors let external links (the CV, for one) point at a section
+// rather than the top of the page.
+const headingId = (text: string | undefined) =>
+  text
+    ?.toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '') || undefined;
+
 function groupBlocks(blocks: ContentBlock[]): Group[] {
   const groups: Group[] = [];
 
@@ -78,19 +86,19 @@ const ContentBlocks = ({ blocks, alt }: ContentBlocksProps) => (
       switch (block.type) {
         case 'h2':
           return (
-            <h2 key={index} className={styles.h2}>
+            <h2 key={index} id={headingId(block.text)} className={styles.h2}>
               {block.text}
             </h2>
           );
         case 'h3':
           return (
-            <h3 key={index} className={styles.h3}>
+            <h3 key={index} id={headingId(block.text)} className={styles.h3}>
               {block.text}
             </h3>
           );
         case 'h4':
           return (
-            <h4 key={index} className={styles.h4}>
+            <h4 key={index} id={headingId(block.text)} className={styles.h4}>
               {block.text}
             </h4>
           );
