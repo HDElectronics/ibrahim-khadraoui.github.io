@@ -3,7 +3,37 @@
 }
 
 .hero {
+  display: flex;
+  align-items: center;
+  gap: var(--s5);
   margin-bottom: var(--s6);
+}
+
+.heroText {
+  flex: 1;
+  min-width: 0;
+}
+
+.portrait {
+  flex: none;
+  width: 240px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+
+@media (max-width: 640px) {
+  .hero {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .portrait {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+  }
 }
 
 .name {
@@ -58,12 +88,37 @@
 }
 
 .row {
-  display: grid;
-  gap: var(--s1);
+  display: flex;
+  align-items: flex-start;
+  gap: var(--s3);
   padding: var(--s3);
   margin-inline: calc(var(--s3) * -1);
   border-radius: var(--radius);
   transition: background var(--t-color);
+}
+
+.rowBody {
+  display: grid;
+  gap: var(--s1);
+  flex: 1;
+  min-width: 0;
+}
+
+.rowThumb {
+  flex: none;
+  display: block;
+  width: 96px;
+  height: 72px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  background: var(--bg-subtle);
+}
+
+.rowThumbImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .row:hover {
