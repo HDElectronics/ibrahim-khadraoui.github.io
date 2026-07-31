@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 
+import AutoplayVideo from '@/components/AutoplayVideo';
 import MediaLightbox from '@/components/MediaLightbox';
 import { MediaItem } from '@/types';
 
@@ -30,9 +31,7 @@ const MediaCarousel = ({ items, alt }: MediaCarouselProps) => {
 
   const renderMedia = (item: MediaItem, className: string, withControls = true) =>
     item.type === 'video' ? (
-      <video className={className} controls={withControls} preload="metadata" playsInline>
-        <source src={item.src} type={videoMimeType(item.src)} />
-      </video>
+      <AutoplayVideo key={item.src} src={item.src} className={className} controls={withControls} />
     ) : (
       /* eslint-disable-next-line @next/next/no-img-element */
       <img className={className} src={item.src} alt={alt} />

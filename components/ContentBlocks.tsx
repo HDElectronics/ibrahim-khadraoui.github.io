@@ -1,14 +1,8 @@
+import AutoplayVideo from '@/components/AutoplayVideo';
 import MediaCarousel from '@/components/MediaCarousel';
 import { ContentBlock, MediaItem } from '@/types';
 
 import styles from '@/styles/ContentBlocks.module.css';
-
-function videoMimeType(src: string): string {
-  const ext = src.split('.').pop()?.toLowerCase();
-  if (ext === 'webm') return 'video/webm';
-  if (ext === 'ogg' || ext === 'ogv') return 'video/ogg';
-  return 'video/mp4';
-}
 
 interface ContentBlocksProps {
   blocks: ContentBlock[];
@@ -70,9 +64,7 @@ const ContentBlocks = ({ blocks, alt }: ContentBlocksProps) => (
         if (group.items.length === 1) {
           const only = group.items[0];
           return only.type === 'video' ? (
-            <video key={index} className={styles.media} controls preload="metadata" playsInline>
-              <source src={only.src} type={videoMimeType(only.src)} />
-            </video>
+            <AutoplayVideo key={index} src={only.src} className={styles.media} />
           ) : (
             /* eslint-disable-next-line @next/next/no-img-element */
             <img key={index} src={only.src} alt={alt} className={styles.media} />
