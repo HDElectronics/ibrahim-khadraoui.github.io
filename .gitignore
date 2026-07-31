@@ -36,3 +36,16 @@ yarn-error.log*
 # cursor
 .cursor
 .env*.local
+
+# CV working folder — contains raw chat exports with credentials. Never commit.
+/ressources_for_CV/
+
+# LaTeX build artifacts (cv/ source is tracked; published PDF lives in public/)
+cv/*.aux
+cv/*.fdb_latexmk
+cv/*.fls
+cv/*.log
+cv/*.out
+cv/*.synctex.gz
+cv/*.pdf
+texput.log
