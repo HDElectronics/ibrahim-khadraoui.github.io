@@ -12,4 +12,16 @@ import { Story } from '@/types';
 //     { type: 'video', src: '/stories/setup/tour.mp4' },
 //   ],
 // },
-export const stories: Story[] = [];
+export const stories: Story[] = [
+  {
+    title: 'My setup',
+    date: 'Jul 2026',
+    text: 'The desk where everything gets built — PC, screens, and the bench that turns ideas into boards.',
+    media: [
+      { type: 'img', src: '/stories/setup/setup-01.jpg' },
+      { type: 'video', src: '/stories/setup/setup-02.mp4' },
+      { type: 'img', src: '/stories/setup/setup-03.jpg' },
+      { type: 'img', src: '/stories/setup/setup-04.jpg' },
+    ],
+  },
+];
