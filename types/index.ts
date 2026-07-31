@@ -102,6 +102,7 @@ export interface SkillGroup {
 export interface Hobby {
   title: string;
   text: string;
+  media?: MediaItem[];
 }
 
 export interface About {

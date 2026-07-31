@@ -102,3 +102,32 @@ a.publicationTitle:hover {
   max-width: var(--measure);
   margin-top: var(--s1);
 }
+
+.intro {
+  display: flex;
+  gap: var(--s5);
+  align-items: flex-start;
+}
+
+.intro > div {
+  flex: 1;
+  min-width: 0;
+}
+
+.cartoon {
+  flex: none;
+  width: 160px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+
+@media (max-width: 640px) {
+  .intro {
+    flex-direction: column;
+  }
+
+  .cartoon {
+    width: 200px;
+    align-self: center;
+  }
+}

@@ -79,6 +79,7 @@ export const about: About = {
     {
       title: 'DCS World',
       text: 'Combat flight simulation with a joystick and a VR headset. I know how to pilot the Su-25T.',
+      media: [{ type: 'img', src: '/about/dcs.jpg' }],
     },
     {
       title: 'PCB Design',

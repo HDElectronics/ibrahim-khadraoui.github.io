@@ -29,12 +29,20 @@ const AboutPage = () => (
       <p className={styles.tagline}>{profile.tagline}</p>
     </header>
 
-    <section className={styles.section}>
-      {about.bioParagraphs.map((paragraph) => (
-        <p key={paragraph} className={styles.paragraph}>
-          {paragraph}
-        </p>
-      ))}
+    <section className={`${styles.section} ${styles.intro}`}>
+      <div>
+        {about.bioParagraphs.map((paragraph) => (
+          <p key={paragraph} className={styles.paragraph}>
+            {paragraph}
+          </p>
+        ))}
+      </div>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/about/me-cartoon.png"
+        alt="AI-generated cartoon of Ibrahim"
+        className={styles.cartoon}
+      />
     </section>
 
     <section className={styles.section}>
@@ -106,6 +114,11 @@ const AboutPage = () => (
           <li key={hobby.title} className={styles.hobby}>
             <span className={styles.hobbyTitle}>{hobby.title}</span>
             <p className={styles.hobbyText}>{hobby.text}</p>
+            {hobby.media && hobby.media.length > 0 && (
+              <div className={styles.awardMedia}>
+                <MediaCarousel items={hobby.media} alt={hobby.title} />
+              </div>
+            )}
           </li>
         ))}
       </ul>
