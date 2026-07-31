@@ -12,9 +12,10 @@ const NAV = [
   { href: '/projects', label: 'projects' },
   { href: '/experience', label: 'experience' },
   { href: '/articles', label: 'articles' },
-  { href: '/stories', label: 'stories' },
   { href: '/about', label: 'about' },
   { href: '/contact', label: 'contact' },
+  { href: '/CV_Ibrahim_Khadraoui.pdf', label: 'cv', external: true },
+  { href: '/stories', label: 'stories' },
 ];
 
 const SiteHeader = () => {
@@ -29,6 +30,19 @@ const SiteHeader = () => {
 
         <nav className={styles.nav}>
           {NAV.map((item) => {
+            if (item.external) {
+              return (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener"
+                  className={styles.link}
+                >
+                  {item.label}
+                </a>
+              );
+            }
             const active = pathname === item.href || pathname.startsWith(`${item.href}/`);
             return (
               <Link

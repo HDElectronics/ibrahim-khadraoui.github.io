@@ -42,9 +42,11 @@ const ProjectDetailPage = async ({ params }: ProjectDetailPageProps) => {
     ...(project.videos ?? []).map((src) => ({ type: 'video' as const, src })),
   ];
   // The hero leads the gallery; everything else keeps its data-file order.
-  const galleryItems: MediaItem[] = project.hero
-    ? [project.hero, ...allMedia.filter((item) => item.src !== project.hero?.src)]
-    : allMedia;
+  // No images/videos at all means the media lives in content — no gallery.
+  const galleryItems: MediaItem[] =
+    allMedia.length > 0 && project.hero
+      ? [project.hero, ...allMedia.filter((item) => item.src !== project.hero?.src)]
+      : allMedia;
 
   return (
     <Container className={styles.page}>
