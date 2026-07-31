@@ -7,7 +7,7 @@ import styles from '@/styles/CircuitBackground.module.css';
 const COLUMN = 720;      // content column width, matches --maxw
 const MIN_VIEWPORT = 1100;
 const GUTTER_PAD = 32;   // keep traces clear of the column edge
-const GLOW_RADIUS = 170;
+const GLOW_RADIUS = 200;
 const IDLE_EPSILON = 0.002;
 
 // Real-PCB routing vocabulary: parallel bus bundles on a fixed grid,
@@ -23,10 +23,19 @@ interface Segment {
   x2: number;
   y2: number;
   via: boolean;
-  glow: number;
 }
 
 const snap = (v: number) => Math.round(v / PITCH) * PITCH;
+
+const hexToRgb = (hex: string): [number, number, number] => {
+  const h = hex.replace('#', '');
+  const full = h.length === 3 ? h.split('').map((c) => c + c).join('') : h;
+  const n = parseInt(full, 16);
+  return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+};
+
+const rgba = ([r, g, b]: [number, number, number], a: number) =>
+  `rgba(${r}, ${g}, ${b}, ${a})`;
 
 function buildTraces(width: number, height: number): Segment[] {
   const segments: Segment[] = [];
@@ -34,7 +43,7 @@ function buildTraces(width: number, height: number): Segment[] {
   if (gutterWidth < 80) return segments;
 
   const pushVia = (x: number, y: number) => {
-    segments.push({ x1: x, y1: y, x2: x, y2: y, via: true, glow: 0 });
+    segments.push({ x1: x, y1: y, x2: x, y2: y, via: true });
   };
 
   for (const side of ['left', 'right'] as const) {
@@ -80,10 +89,10 @@ function buildTraces(width: number, height: number): Segment[] {
           const bendY = jogY + lane * PITCH;
           if (bendY > height - EDGE * 4) break;
 
-          segments.push({ x1: x, y1: y, x2: x, y2: bendY, via: false, glow: 0 });
+          segments.push({ x1: x, y1: y, x2: x, y2: bendY, via: false });
           const nx = toScreen(gx + dx);
           const ny = bendY + Math.abs(dx); // 45°: dy equals |dx|
-          segments.push({ x1: x, y1: bendY, x2: nx, y2: ny, via: false, glow: 0 });
+          segments.push({ x1: x, y1: bendY, x2: nx, y2: ny, via: false });
           gx += dx;
           x = nx;
           y = ny;
@@ -91,7 +100,7 @@ function buildTraces(width: number, height: number): Segment[] {
 
         const endY = height - EDGE;
         if (y < endY) {
-          segments.push({ x1: x, y1: y, x2: x, y2: endY, via: false, glow: 0 });
+          segments.push({ x1: x, y1: y, x2: x, y2: endY, via: false });
         }
         pushVia(x, endY);
       }
@@ -121,49 +130,143 @@ const CircuitBackground = () => {
     let resizeFrame = 0;
     let running = false;
     let active = false;
-    const pointer = { x: -9999, y: -9999 };
-    const colours = { base: '#23272e', accent: '#4cc9f0' };
+    const pointer = { x: -9999, y: -9999, inside: false };
+    const light = { x: 0, y: 0, intensity: 0 };
+    const colours = {
+      base: '#23272e',
+      accent: [76, 201, 240] as [number, number, number],
+      core: [255, 255, 255] as [number, number, number],
+      dark: true,
+    };
 
     const readColours = () => {
       const style = getComputedStyle(document.documentElement);
       colours.base = style.getPropertyValue('--border').trim() || colours.base;
-      colours.accent = style.getPropertyValue('--accent').trim() || colours.accent;
+      colours.accent = hexToRgb(style.getPropertyValue('--accent').trim() || '#4cc9f0');
+      colours.dark = (document.documentElement.dataset.theme ?? 'dark') !== 'light';
+      // Hot centre of the light: near-white in dark mode, pure accent on light.
+      colours.core = colours.dark
+        ? (colours.accent.map((c) => Math.round(c + (255 - c) * 0.7)) as [
+            number,
+            number,
+            number,
+          ])
+        : colours.accent;
     };
 
-    // Paints the current frame and reports how far the glow values still
-    // are from their targets, so the caller can tell whether anything
-    // actually changed.
+    // Paints the current frame and reports how far the light still is from
+    // the pointer, so the caller can tell whether anything actually changed.
     const draw = () => {
-      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      ctx.clearRect(0, 0, w, h);
 
-      let maxDelta = 0;
-
+      // Copper layer: every trace and via, dim and unlit.
+      ctx.globalAlpha = 0.32;
+      ctx.strokeStyle = colours.base;
+      ctx.fillStyle = colours.base;
+      ctx.lineWidth = 1;
+      ctx.beginPath();
       for (const seg of segments) {
-        const mx = (seg.x1 + seg.x2) / 2;
-        const my = (seg.y1 + seg.y2) / 2;
-        const dist = Math.hypot(mx - pointer.x, my - pointer.y);
-        const target = dist < GLOW_RADIUS ? 1 - dist / GLOW_RADIUS : 0;
-        maxDelta = Math.max(maxDelta, Math.abs(target - seg.glow));
-        seg.glow += (target - seg.glow) * 0.12;
-
-        const lit = seg.glow > 0.02;
-        ctx.strokeStyle = lit ? colours.accent : colours.base;
-        ctx.globalAlpha = 0.34 + seg.glow * 0.6;
-        ctx.lineWidth = 1;
-        ctx.beginPath();
+        if (seg.via) continue;
         ctx.moveTo(seg.x1, seg.y1);
         ctx.lineTo(seg.x2, seg.y2);
+      }
+      ctx.stroke();
+      ctx.beginPath();
+      for (const seg of segments) {
+        if (!seg.via) continue;
+        ctx.moveTo(seg.x1 + 2, seg.y1);
+        ctx.arc(seg.x1, seg.y1, 2, 0, Math.PI * 2);
+      }
+      ctx.fill();
+      ctx.globalAlpha = 1;
+
+      // The light trails the pointer and fades in and out smoothly.
+      const targetI = pointer.inside ? 1 : 0;
+      if (light.intensity < 0.02 && targetI > 0) {
+        light.x = pointer.x;
+        light.y = pointer.y;
+      }
+      let posDelta = 0;
+      if (targetI > 0) {
+        const dx = pointer.x - light.x;
+        const dy = pointer.y - light.y;
+        posDelta = Math.hypot(dx, dy) / GLOW_RADIUS;
+        light.x += dx * 0.16;
+        light.y += dy * 0.16;
+      }
+      const iDelta = targetI - light.intensity;
+      light.intensity += iDelta * 0.08;
+      const maxDelta = Math.max(posDelta * 0.3, Math.abs(iDelta));
+
+      const intensity = light.intensity;
+      if (intensity > 0.02) {
+        const reach = GLOW_RADIUS * 1.4;
+        const near = segments.filter(
+          (seg) =>
+            Math.min(seg.x1, seg.x2) < light.x + reach &&
+            Math.max(seg.x1, seg.x2) > light.x - reach &&
+            Math.min(seg.y1, seg.y2) < light.y + reach &&
+            Math.max(seg.y1, seg.y2) > light.y - reach
+        );
+
+        const tracePath = () => {
+          ctx.beginPath();
+          for (const seg of near) {
+            if (seg.via) continue;
+            ctx.moveTo(seg.x1, seg.y1);
+            ctx.lineTo(seg.x2, seg.y2);
+          }
+        };
+
+        ctx.save();
+        // Additive blending reads as emitted light on the dark board; on the
+        // light theme it would wash out to white, so paint normally there.
+        if (colours.dark) ctx.globalCompositeOperation = 'lighter';
+        ctx.shadowColor = rgba(colours.accent, 0.9 * intensity);
+
+        // Wide halo bleeding off the traces.
+        const halo = ctx.createRadialGradient(
+          light.x, light.y, 0,
+          light.x, light.y, reach
+        );
+        halo.addColorStop(0, rgba(colours.accent, 0.5 * intensity));
+        halo.addColorStop(0.5, rgba(colours.accent, 0.16 * intensity));
+        halo.addColorStop(1, rgba(colours.accent, 0));
+        ctx.shadowBlur = 16 * intensity;
+        ctx.strokeStyle = halo;
+        ctx.lineWidth = 3;
+        tracePath();
         ctx.stroke();
 
-        if (seg.via) {
-          ctx.fillStyle = lit ? colours.accent : colours.base;
-          ctx.beginPath();
-          ctx.arc(seg.x1, seg.y1, 2, 0, Math.PI * 2);
-          ctx.fill();
+        // Hot core directly under the light.
+        const core = ctx.createRadialGradient(
+          light.x, light.y, 0,
+          light.x, light.y, reach * 0.7
+        );
+        core.addColorStop(0, rgba(colours.core, 0.95 * intensity));
+        core.addColorStop(0.6, rgba(colours.core, 0.25 * intensity));
+        core.addColorStop(1, rgba(colours.core, 0));
+        ctx.shadowBlur = 6 * intensity;
+        ctx.strokeStyle = core;
+        ctx.lineWidth = 1.3;
+        tracePath();
+        ctx.stroke();
+
+        // Via pads catch the glow like solder points.
+        ctx.shadowBlur = 10 * intensity;
+        ctx.fillStyle = halo;
+        ctx.beginPath();
+        for (const seg of near) {
+          if (!seg.via) continue;
+          ctx.moveTo(seg.x1 + 2.5, seg.y1);
+          ctx.arc(seg.x1, seg.y1, 2.5, 0, Math.PI * 2);
         }
+        ctx.fill();
+        ctx.restore();
       }
 
-      ctx.globalAlpha = 1;
       return maxDelta;
     };
 
@@ -206,12 +309,12 @@ const CircuitBackground = () => {
     const onPointerMove = (event: PointerEvent) => {
       pointer.x = event.clientX;
       pointer.y = event.clientY;
+      pointer.inside = true;
       start();
     };
 
     const onPointerLeave = () => {
-      pointer.x = -9999;
-      pointer.y = -9999;
+      pointer.inside = false;
       start();
     };
 
