@@ -37,10 +37,14 @@ const ProjectDetailPage = async ({ params }: ProjectDetailPageProps) => {
     notFound();
   }
 
-  const galleryItems: MediaItem[] = [
+  const allMedia: MediaItem[] = [
     ...project.images.map((src) => ({ type: 'img' as const, src })),
     ...(project.videos ?? []).map((src) => ({ type: 'video' as const, src })),
   ];
+  // The hero leads the gallery; everything else keeps its data-file order.
+  const galleryItems: MediaItem[] = project.hero
+    ? [project.hero, ...allMedia.filter((item) => item.src !== project.hero?.src)]
+    : allMedia;
 
   return (
     <Container className={styles.page}>

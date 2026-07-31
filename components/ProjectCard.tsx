@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+import AutoplayVideo from '@/components/AutoplayVideo';
 import { Project } from '@/types';
 
 import styles from '@/styles/ProjectCard.module.css';
@@ -10,19 +11,26 @@ interface ProjectCardProps {
 }
 
 const ProjectCard = ({ project }: ProjectCardProps) => {
-  const heroImage = project.images?.[0];
+  const hero =
+    project.hero ??
+    (project.images[0] ? { type: 'img' as const, src: project.images[0] } : undefined);
 
   return (
     <Link href={project.link} className={styles.card}>
-      {heroImage && (
+      {hero && (
         <div className={styles.thumb}>
-          <Image
-            src={heroImage}
-            alt={project.title}
-            fill
-            sizes="(max-width: 700px) 100vw, 340px"
-            className={styles.image}
-          />
+          {hero.type === 'video' ? (
+            <AutoplayVideo src={hero.src} className={styles.video} controls={false} />
+          ) : (
+            <Image
+              src={hero.src}
+              alt={project.title}
+              fill
+              sizes="(max-width: 700px) 100vw, 340px"
+              unoptimized={hero.src.endsWith('.gif')}
+              className={styles.image}
+            />
+          )}
         </div>
       )}
 

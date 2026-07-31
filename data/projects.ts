@@ -51,7 +51,12 @@ export const projects: Project[] = [
     category: 'professional',
     comingSoon: true,
     tags: ['VLA', 'Robotics', 'Data Collection', 'Tossenrobotics', 'Evaluation', 'Inference'],
-    images: ['/projects/vla-data-pipeline/architecture.svg'],
+    hero: { type: 'video', src: '/projects/vla-data-pipeline/aloha-data-collection.mp4' },
+    images: [
+      '/projects/vla-data-pipeline/aloha-setup.jpg',
+      '/projects/vla-data-pipeline/architecture.svg',
+    ],
+    videos: ['/projects/vla-data-pipeline/aloha-data-collection.mp4'],
     content: [
       {
         type: 'p',
@@ -79,7 +84,11 @@ export const projects: Project[] = [
     slug: 'falcon',
     category: 'professional',
     tags: ['Jetson Orin', 'VLM', 'Whisper', 'Piper', 'ONNX Runtime', 'Edge AI', 'TII'],
-    images: ['/projects/falcon/architecture.svg'],
+    images: [
+      '/projects/falcon/falcorin-hero-image.PNG',
+      '/projects/falcon/architecture.svg',
+    ],
+    videos: ['/projects/falcon/falcon-demo.mp4'],
     content: [
       {
         type: 'p',
@@ -104,6 +113,7 @@ export const projects: Project[] = [
     slug: 'falcon3-ios',
     category: 'professional',
     tags: ['iOS', 'MLX', 'Falcon3', 'VLM', 'Edge AI', 'TII'],
+    hero: { type: 'video', src: '/projects/falcon3-ios/ios-app-demo.mp4' },
     images: ['/projects/falcon3-ios/architecture.svg'],
     videos: ['/projects/falcon3-ios/ios-app-demo.mp4'],
     content: [
@@ -187,6 +197,7 @@ export const projects: Project[] = [
     slug: 'atc',
     category: 'hobby',
     tags: ['YOLOv5', 'RKNN', 'ByteTrack', 'MQTT', 'PX4', 'MAVSDK', 'RK3588', 'Robotics'],
+    hero: { type: 'video', src: '/projects/atc/demo.mp4' },
     images: ['/projects/atc/architecture.svg'],
     videos: ['/projects/atc/demo.mp4', '/projects/atc/hardware-usage.webm'],
     externalUrl: 'https://github.com/HDElectronics/atc',
@@ -265,8 +276,8 @@ export const projects: Project[] = [
     category: 'professional',
     tags: ['A2RL', 'Autonomous Racing', 'GPS', 'Python', 'Broadcast', 'Algorithms'],
     images: [
-      '/projects/a2rl-smart-camera/emm-lib.gif',
       '/projects/a2rl-smart-camera/real-test-one-car.gif',
+      '/projects/a2rl-smart-camera/emm-lib.gif',
       '/projects/a2rl-smart-camera/geofencing.gif',
     ],
     content: [
@@ -291,10 +302,10 @@ export const projects: Project[] = [
     category: 'professional',
     tags: ['UWB', 'DWM1000', 'ROS', 'Robotics', 'Master Thesis'],
     images: [
+      '/projects/icar/uwb-localization-test.png',
       '/projects/icar/robot-3d-design.png',
       '/projects/icar/system-architecture.png',
       '/projects/icar/dwm1000-pcb.png',
-      '/projects/icar/uwb-localization-test.png',
     ],
     content: [
       {
@@ -365,6 +376,7 @@ export const projects: Project[] = [
     category: 'hardware',
     comingSoon: true,
     tags: ['PCB Design', 'Firmware', 'ROS', 'Nav2', 'Wi-Fi', 'Odometry'],
+    hero: { type: 'video', src: '/projects/small-robot/robot-testing.mp4' },
     images: ['/projects/small-robot/robot-board.jpg'],
     videos: [
       '/projects/small-robot/robot-parts.mp4',

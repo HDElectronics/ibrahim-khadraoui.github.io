@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 
+import AutoplayVideo from '@/components/AutoplayVideo';
 import Container from '@/components/Container';
 import { profile } from '@/data/profile';
 import { projects } from '@/data/projects';
@@ -48,18 +49,33 @@ const HomePage = () => {
         </div>
 
         <ul className={styles.list}>
-          {selected.map((project) => (
+          {selected.map((project) => {
+            const hero =
+              project.hero ??
+              (project.images[0]
+                ? { type: 'img' as const, src: project.images[0] }
+                : undefined);
+            return (
             <li key={project.slug}>
               <Link href={project.link} className={styles.row}>
-                {project.images?.[0] && (
+                {hero && (
                   <span className={styles.rowThumb}>
-                    <Image
-                      src={project.images[0]}
-                      alt=""
-                      width={96}
-                      height={72}
-                      className={styles.rowThumbImg}
-                    />
+                    {hero.type === 'video' ? (
+                      <AutoplayVideo
+                        src={hero.src}
+                        className={styles.rowThumbImg}
+                        controls={false}
+                      />
+                    ) : (
+                      <Image
+                        src={hero.src}
+                        alt=""
+                        width={96}
+                        height={72}
+                        unoptimized={hero.src.endsWith('.gif')}
+                        className={styles.rowThumbImg}
+                      />
+                    )}
                   </span>
                 )}
                 <span className={styles.rowBody}>
@@ -73,7 +89,8 @@ const HomePage = () => {
                 </span>
               </Link>
             </li>
-          ))}
+            );
+          })}
         </ul>
       </section>
 

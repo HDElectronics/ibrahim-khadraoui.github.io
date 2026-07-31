@@ -9,6 +9,8 @@ export interface Project {
   tags: string[];
   images: string[];
   videos?: string[];
+  /** Lead media for cards and galleries; defaults to images[0]. */
+  hero?: MediaItem;
   category?: ProjectCategory;
   content?: ContentBlock[];
   comingSoon?: boolean;
