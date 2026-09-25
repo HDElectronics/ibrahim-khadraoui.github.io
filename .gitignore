@@ -50,3 +50,6 @@ cv/*.out
 cv/*.synctex.gz
 cv/*.pdf
 texput.log
+
+# Fox3 Academy is its own git repo (github.com/HDElectronics/Fox3-Academy); never commit the clone
+/Fox3-Academy/
